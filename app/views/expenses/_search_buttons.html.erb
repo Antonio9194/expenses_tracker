@@ -1,9 +1,9 @@
-<%= link_to "All", expenses_path(params.permit(:billing_cycle)), class: "btn-filter #{params[:category].blank? ? 'active' : ''}" %>
-<%= link_to "Housing", expenses_path(params.permit(:billing_cycle).merge(category: "housing")), class: "btn-filter #{params[:category] == 'housing' ? 'active' : ''}" %>
-<%= link_to "Food", expenses_path(params.permit(:billing_cycle).merge(category: "food")), class: "btn-filter #{params[:category] == 'food' ? 'active' : ''}" %>
-<%= link_to "Transport", expenses_path(params.permit(:billing_cycle).merge(category: "transport")), class: "btn-filter #{params[:category] == 'transport' ? 'active' : ''}" %>
-<%= link_to "Entertainment", expenses_path(params.permit(:billing_cycle).merge(category: "entertainment")), class: "btn-filter #{params[:category] == 'entertainment' ? 'active' : ''}" %>
-<%= link_to "Utilities", expenses_path(params.permit(:billing_cycle).merge(category: "utilities")), class: "btn-filter #{params[:category] == 'utilities' ? 'active' : ''}" %>
-<%= link_to "Shopping", expenses_path(params.permit(:billing_cycle).merge(category: "shopping")), class: "btn-filter #{params[:category] == 'shopping' ? 'active' : ''}" %>
-<%= link_to "Health", expenses_path(params.permit(:billing_cycle).merge(category: "health")), class: "btn-filter #{params[:category] == 'health' ? 'active' : ''}" %>
-<%= link_to "Other", expenses_path(params.permit(:billing_cycle).merge(category: "other")), class: "btn-filter #{params[:category] == 'other' ? 'active' : ''}" %>
+<%= link_to "All",           expenses_path,                                          class: "btn-filter #{params[:category].blank? ? 'active' : ''}" %>
+<%= link_to "Housing",       expenses_path(category: "housing"),       class: "btn-filter #{params[:category] == 'housing'       ? 'active' : ''}" %>
+<%= link_to "Food",          expenses_path(category: "food"),          class: "btn-filter #{params[:category] == 'food'          ? 'active' : ''}" %>
+<%= link_to "Transport",     expenses_path(category: "transport"),     class: "btn-filter #{params[:category] == 'transport'     ? 'active' : ''}" %>
+<%= link_to "Entertainment", expenses_path(category: "entertainment"), class: "btn-filter #{params[:category] == 'entertainment' ? 'active' : ''}" %>
+<%= link_to "Utilities",     expenses_path(category: "utilities"),     class: "btn-filter #{params[:category] == 'utilities'     ? 'active' : ''}" %>
+<%= link_to "Shopping",      expenses_path(category: "shopping"),      class: "btn-filter #{params[:category] == 'shopping'      ? 'active' : ''}" %>
+<%= link_to "Health",        expenses_path(category: "health"),        class: "btn-filter #{params[:category] == 'health'        ? 'active' : ''}" %>
+<%= link_to "Other",         expenses_path(category: "other"),         class: "btn-filter #{params[:category] == 'other'         ? 'active' : ''}" %>

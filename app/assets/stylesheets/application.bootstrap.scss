@@ -263,6 +263,34 @@ body {
 .expenses-title      .panel-icon { background: rgba(255,77,109,0.15); color: var(--danger); }
 .subscriptions-title .panel-icon { background: var(--accent-glow);    color: var(--accent); }
 
+/* ─── Panel header inline stat ───────────────────────────────────── */
+.panel-header-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.2rem 1.25rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  margin: 0 auto;
+}
+
+.panel-header-stat-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.panel-header-stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--danger);
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    BUTTONS — NEW / ACTION
    ═══════════════════════════════════════════════════════════════════ */

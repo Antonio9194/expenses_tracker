@@ -4,6 +4,10 @@
       <span class="panel-icon"><i class="bi bi-arrow-repeat"></i></span>
       Subscriptions
     </div>
+    <div class="panel-header-stat">
+      <div class="panel-header-stat-label"><%= Date.today.strftime("%B %Y") %></div>
+      <div class="panel-header-stat-value"><%= format_currency(@monthly_subscription) %></div>
+    </div>
     <%= link_to "+ New", new_subscription_path, class: "btn-new" %>
   </div>
   <div class="panel-filters">

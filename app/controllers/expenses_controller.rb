@@ -2,17 +2,10 @@ class ExpensesController < ApplicationController
   before_action :set_expense, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_user!
   def index
-    all_expenses      = (current_user.admin? ? Expense.all      : current_user.expenses).order(date: :desc)
-
-
-    # Stats always use the full unfiltered collections
-    @yearly_expenses = all_expenses.where(date: Date.today.beginning_of_year..Date.today.end_of_year).sum(:amount)
-
-    @monthly_expenses         = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
-    @monthly_expenses_record  = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).order(date: :desc)
-    # Apply filters only for the table display
-    @expenses      = all_expenses
-    @expenses = @expenses.where(category: params[:category]) if params[:category].present?
+    all_expenses      = (current_user.admin? ? Expense.all : current_user.expenses).order(date: :desc)
+    @monthly_expenses = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
+    @expenses         = all_expenses
+    @expenses         = @expenses.where(category: params[:category]) if params[:category].present?
   end
 
   def show

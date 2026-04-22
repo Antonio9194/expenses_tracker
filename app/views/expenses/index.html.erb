@@ -5,6 +5,15 @@
       <%= link_to "Dashboard", root_path, class: "btn-filter" %>
       <%= link_to "Subscriptions", subscriptions_path, class: "btn-filter" %>
     </nav>
+    <div class="header-right">
+      <span class="header-meta"><%= Date.today.strftime("%B %d, %Y") %></span>
+      <%= form_with url: update_currency_path, method: :patch, html: { class: "currency-switcher", "data-turbo" => "false" } do |f| %>
+        <%= f.select :currency,
+            [["$ USD", "USD"], ["€ EUR", "EUR"], ["£ GBP", "GBP"], ["¥ JPY", "JPY"], ["¥ CNY", "CNY"]],
+            { selected: current_user.currency },
+            { class: "currency-select", onchange: "this.form.submit()" } %>
+      <% end %>
+    </div>
   </div>
   <div class="panel-grid">
     <%= render "expenses" %>
