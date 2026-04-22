@@ -59,6 +59,37 @@ body {
   color: var(--text-muted);
 }
 
+/* ─── Currency switcher ──────────────────────────────────────────── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.currency-switcher {
+  display: inline-flex;
+}
+
+.currency-select {
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  outline: none;
+
+  &:hover, &:focus { border-color: var(--accent); }
+
+  option {
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+  }
+}
+
 /* ─── Stats strip ────────────────────────────────────────────────── */
 .stats-strip {
   display: flex;
@@ -182,6 +213,7 @@ body {
 .panel-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 /* ─── Table ──────────────────────────────────────────────────────── */
@@ -189,6 +221,24 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.82rem;
+}
+
+.panel-table thead th:first-child,
+.panel-table tbody td:first-child,
+.panel-table tfoot td:first-child {
+  width: 100%;
+}
+
+.col-amount {
+  text-align: right;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.col-actions {
+  text-align: right;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .panel-table thead th {
@@ -525,100 +575,97 @@ form.inline-form { display: inline; }
 
 @media (max-width: 479px) {
   .form-group-row { grid-template-columns: 1fr; }
-  .form-actions { flex-direction: column; }
+  .form-actions   { flex-direction: column; }
 }
 
 /* ════════════════════════════════════════════════════════════════════
    RESPONSIVE
+   ════════════════════════════════════════════════════════════════════
+
+   Breakpoints:
+   ≤ 1024px  Tablet
+   ≤  768px  Large phone / phablet
+   ≤  425px  Normal phone
+   ≤  375px  Small phone
+   ≤  320px  Very small phone
    ════════════════════════════════════════════════════════════════════ */
 
-/* Tablet (768px – 1024px): keep two columns but tighten everything */
+/* ── Tablet (≤ 1024px) ───────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .panel-table tbody td,
-  .panel-table thead th,
-  .panel-table tfoot td {
-    padding-left: 0.65rem;
-    padding-right: 0.65rem;
-  }
-
-  .btn-action {
-    width: 48px;
-    font-size: 0.62rem;
-  }
-
-  .stats-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stats-row-center .stat-card {
-    width: calc(50% - 0.375rem);
-  }
-}
-
-/* Phablet / large phone landscape (600px – 767px): single column */
-@media (max-width: 767px) {
-  .panel-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stats-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .stats-row-center .stat-card {
-    width: calc(50% - 0.375rem);
-  }
-}
-
-/* Small phone (< 480px): hide secondary cols, tighten further */
-@media (max-width: 479px) {
-  .col-secondary {
-    display: none;
-  }
-
-  .stats-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-
-  .stats-row-center {
-    flex-direction: column;
-
-    .stat-card { width: 100%; }
-  }
-
-  .stat-card {
-    padding: 0.7rem 0.85rem;
-  }
-
-  .panel-table {
-    font-size: 0.78rem;
-  }
+  .stats-row               { grid-template-columns: repeat(3, 1fr); }
+  .stats-row-center .stat-card { width: calc(50% - 0.375rem); }
 
   .panel-table tbody td,
   .panel-table thead th,
-  .panel-table tfoot td {
-    padding: 0.55rem 0.65rem;
-  }
+  .panel-table tfoot td    { padding-left: 0.75rem; padding-right: 0.75rem; }
 
-  .btn-action {
-    width: 42px;
-    font-size: 0.6rem;
-    padding: 0.22rem 0;
-  }
+  .btn-action              { width: 50px; font-size: 0.64rem; }
+}
 
-  .panel-header {
-    padding: 0.7rem 0.85rem;
+/* ── Large phone / phablet (≤ 768px) ─────────────────────────────── */
+@media (max-width: 768px) {
+  .panel-grid              { grid-template-columns: 1fr; }
+  .stats-row               { grid-template-columns: repeat(2, 1fr); }
+  .stats-row-center .stat-card { width: calc(50% - 0.375rem); }
+}
+
+/* ── Normal phone (≤ 425px) ──────────────────────────────────────── */
+@media (max-width: 425px) {
+  col.col-secondary,
+  .col-secondary           { display: none; }
+
+  .dashboard               { padding: 0.75rem; }
+
+  .stats-row               { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .stats-row-center        { flex-direction: column; }
+  .stats-row-center .stat-card { width: 100%; }
+
+  .stat-card               { padding: 0.7rem 0.85rem; }
+
+  .panel-table             { font-size: 0.78rem; }
+  .panel-table tbody td,
+  .panel-table thead th,
+  .panel-table tfoot td    { padding: 0.55rem 0.6rem; }
+
+  .btn-action              { width: 44px; font-size: 0.6rem; padding: 0.22rem 0; }
+
+  .panel-header            { padding: 0.7rem 0.85rem; }
+
+  .panel-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    &::-webkit-scrollbar   { display: none; }
   }
 }
 
-/* Very small phone (< 360px) */
-@media (max-width: 359px) {
-  .stats-strip {
-    grid-template-columns: 1fr 1fr;
-  }
+/* ── Small phone (≤ 375px) ───────────────────────────────────────── */
+@media (max-width: 375px) {
+  .dashboard               { padding: 0.6rem; }
+  .stat-card .stat-value   { font-size: 1rem; }
+  .btn-action              { width: 40px; font-size: 0.58rem; }
 
-  .stat-card .stat-value {
-    font-size: 0.9rem;
-  }
+  .panel-table tbody td,
+  .panel-table thead th,
+  .panel-table tfoot td    { padding: 0.5rem 0.5rem; }
+}
+
+/* ── Very small phone (≤ 320px) ──────────────────────────────────── */
+@media (max-width: 320px) {
+  .dashboard               { padding: 0.5rem; }
+
+  .dashboard-header        { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .header-right            { width: 100%; justify-content: space-between; }
+
+  .stats-row               { grid-template-columns: 1fr; gap: 0.4rem; }
+  .stats-row-center        { flex-direction: column; }
+  .stats-row-center .stat-card { width: 100%; }
+
+  .stat-card               { padding: 0.6rem 0.75rem; }
+  .stat-card .stat-value   { font-size: 0.95rem; }
+  .stat-card .stat-label   { font-size: 0.6rem; }
+
+  .panel-header            { flex-wrap: wrap; gap: 0.4rem; }
+  .btn-action              { width: 36px; font-size: 0.55rem; }
 }

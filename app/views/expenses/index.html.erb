@@ -2,40 +2,48 @@
   <!-- Header -->
   <div class="dashboard-header">
     <h1>Overview</h1>
-    <span class="header-meta"><%= Date.today.strftime("%B %d, %Y") %></span>
+    <div class="header-right">
+      <span class="header-meta"><%= Date.today.strftime("%B %d, %Y") %></span>
+      <%= form_with url: update_currency_path, method: :patch, html: { class: "currency-switcher", "data-turbo" => "false" } do |f| %>
+        <%= f.select :currency,
+          [["$ USD", "USD"], ["€ EUR", "EUR"], ["£ GBP", "GBP"], ["¥ JPY", "JPY"], ["¥ CNY", "CNY"]],
+          { selected: current_user.currency },
+          { class: "currency-select", onchange: "this.form.submit()" } %>
+      <% end %>
+    </div>
   </div>
   <!-- Stats strip -->
   <div class="stats-strip">
     <div class="stats-row">
       <div class="stat-card stat-expenses">
-        <div class="stat-label">Total Expenses</div>
-        <div class="stat-value"><%= number_to_currency(@total_expenses) %></div>
+        <div class="stat-label">Total Expenses for <%= Date.today.strftime("%Y") %></div>
+        <div class="stat-value"><%= format_currency(@yearly_expenses) %></div>
       </div>
       <div class="stat-card stat-subscriptions">
-        <div class="stat-label">Active Subscriptions</div>
-        <div class="stat-value"><%= number_to_currency(@active_subscriptions_total) %></div>
+        <div class="stat-label">Active Subscriptions for <%= Date.today.strftime("%Y") %></div>
+        <div class="stat-value"><%= format_currency(@active_subscriptions_total) %></div>
       </div>
       <div class="stat-card stat-total">
         <div class="stat-label">Combined Total</div>
-        <div class="stat-value"><%= number_to_currency(@combined_total) %></div>
+        <div class="stat-value"><%= format_currency(@combined_total) %></div>
       </div>
     </div>
     <div class="stats-row stats-row-center">
       <div class="stat-card">
         <div class="stat-label">Total Expenses for <%= Date.today.strftime("%B %Y") %></div>
-        <div class="stat-value"><%= number_to_currency(@monthly_expenses) %></div>
+        <div class="stat-value"><%= format_currency(@monthly_expenses) %></div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Total Active Subscriptions for <%= Date.today.strftime("%B %Y") %></div>
-        <div class="stat-value"><%= number_to_currency(@monthly_subscription) %></div>
+        <div class="stat-value"><%= format_currency(@monthly_subscription) %></div>
       </div>
     </div>
   </div>
   <!-- Two-column panel grid -->
   <div class="panel-grid">
-    <!-- Expenses panel -->
-    <%= render "expenses" %>
     <!-- Subscriptions panel -->
     <%= render "subscription" %>
+    <!-- Expenses panel -->
+    <%= render "expenses" %>
   </div>
 </div>

@@ -1,4 +1,3 @@
-
 Subscription.destroy_all
 Expense.destroy_all
 User.destroy_all
