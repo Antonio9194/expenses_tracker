@@ -3,23 +3,16 @@ class ExpensesController < ApplicationController
   before_action :authenticate_user!
   def index
     all_expenses      = (current_user.admin? ? Expense.all      : current_user.expenses).order(date: :desc)
-    all_subscriptions = (current_user.admin? ? Subscription.all : current_user.subscriptions.order(date: :desc))
+
 
     # Stats always use the full unfiltered collections
     @yearly_expenses = all_expenses.where(date: Date.today.beginning_of_year..Date.today.end_of_year).sum(:amount)
-    @active_subscriptions_total = all_subscriptions.active.sum(:amount)
-    @combined_total           = @yearly_expenses + @active_subscriptions_total
+
     @monthly_expenses         = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
     @monthly_expenses_record  = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).order(date: :desc)
-    @monthly_subscription     = all_subscriptions.active.where(billing_cycle: :monthly).sum(:amount)
-    @expense_count            = all_expenses.count
-
     # Apply filters only for the table display
     @expenses      = all_expenses
-    @subscriptions = all_subscriptions
-    @expenses      = @expenses.where(category: params[:category])           if params[:category].present?
-    @subscriptions = @subscriptions.where(billing_cycle: params[:billing_cycle]) if params[:billing_cycle].present?
-    @subscriptions = @subscriptions.where(status: params[:status])          if params[:status].present?
+    @expenses = @expenses.where(category: params[:category]) if params[:category].present?
   end
 
   def show

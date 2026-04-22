@@ -10,7 +10,7 @@
     <%= render "search_buttons" %>
   </div>
   <div class="panel-scroll">
-    <% if @expenses.any? %>
+    <% if @monthly_expenses_record.any? %>
       <table class="panel-table">
         <colgroup>
           <col class="col-title">
@@ -51,7 +51,7 @@
             <td>Total</td>
             <td></td>
             <td></td>
-            <td class="col-amount"><%= format_currency(@total_expenses) %></td>
+            <td class="col-amount"><%= format_currency(@monthly_expenses) %></td>
             <td></td>
           </tr>
         </tfoot>
@@ -59,7 +59,7 @@
     <% else %>
       <div class="empty-state">
         <div class="empty-icon"><i class="bi bi-receipt"></i></div>
-        <div>No expenses yet</div>
+        <div>No expenses this month</div>
       </div>
     <% end %>
   </div>
