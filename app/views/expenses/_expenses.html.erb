@@ -1,0 +1,61 @@
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-title expenses-title">
+      <span class="panel-icon"><i class="bi bi-receipt"></i></span>
+      Expenses
+    </div>
+    <%= link_to "+ New", new_expense_path, class: "btn-new" %>
+  </div>
+  <div class="panel-filters">
+    <%= render "search_buttons" %>
+  </div>
+  <div class="panel-scroll">
+    <% if @expenses.any? %>
+      <table class="panel-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th class="col-secondary">Category</th>
+            <th class="col-secondary">Date</th>
+            <th style="text-align:right">Amount</th>
+            <th style="text-align:right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @expenses.order(date: :desc).each do |expense| %>
+            <tr>
+              <td><%= expense.title %></td>
+              <td class="col-secondary">
+                <span class="tag tag-category"><%= expense.category.humanize %></span>
+              </td>
+              <td class="col-secondary" style="color: var(--text-muted)">
+                <%= expense.date.strftime("%b %d, %Y") %>
+              </td>
+              <td style="text-align:right">
+                <span class="amount"><%= number_to_currency(expense.amount) %></span>
+              </td>
+              <td class="action-cell">
+                <%= link_to "Edit", edit_expense_path(expense), class: "btn-action btn-edit" %>
+                <%= button_to "Delete", expense_path(expense), method: :delete,
+                          class: "btn-action btn-delete",
+                          form: { class: "inline-form", data: { turbo_confirm: "Delete this expense?" } } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Total</td>
+            <td style="text-align:right"><%= number_to_currency(@expenses.sum(:amount)) %></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    <% else %>
+      <div class="empty-state">
+        <div class="empty-icon"><i class="bi bi-receipt"></i></div>
+        <div>No expenses yet</div>
+      </div>
+    <% end %>
+  </div>
+</div>

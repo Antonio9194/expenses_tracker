@@ -1,2 +1,37 @@
-<h1>Subscriptions#new</h1>
-<p>Find me in app/views/subscriptions/new.html.erb</p>
+<div class="form-page">
+  <div class="form-card">
+    <div class="form-card-header">
+      <span class="form-card-icon icon-accent"><i class="bi bi-arrow-repeat"></i></span>
+      <h2 class="form-card-title">New Subscription</h2>
+    </div>
+
+    <%= simple_form_for @subscription, html: { class: "premium-form" } do |f| %>
+      <div class="form-group-row">
+        <div class="form-field">
+          <%= f.input :title, label: "Title", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
+        </div>
+        <div class="form-field">
+          <%= f.input :amount, label: "Amount", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
+        </div>
+      </div>
+
+      <div class="form-group-row">
+        <div class="form-field">
+          <%= f.input :billing_cycle, collection: Subscription.billing_cycles.keys, label: "Billing Cycle", input_html: { class: "premium-input premium-select" }, wrapper_html: { class: "field-wrapper" } %>
+        </div>
+        <div class="form-field">
+          <%= f.input :start_date, label: "Start Date", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <%= f.input :status, collection: Subscription.statuses.keys, label: "Status", input_html: { class: "premium-input premium-select" }, wrapper_html: { class: "field-wrapper" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Save Subscription", class: "btn-submit" %>
+        <%= link_to "Cancel", expenses_path, class: "btn-cancel" %>
+      </div>
+    <% end %>
+  </div>
+</div>

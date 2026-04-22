@@ -4,6 +4,16 @@ class ExpensesController < ApplicationController
   def index
     @expenses = current_user.admin? ? Expense.all : current_user.expenses
     @subscriptions = current_user.admin? ? Subscription.all : current_user.subscriptions
+
+    @expenses = @expenses.where(category: params[:category]) if params[:category].present?
+    @subscriptions = @subscriptions.where(billing_cycle: params[:billing_cycle]) if params[:billing_cycle].present?
+    @subscriptions = @subscriptions.where(status: params[:status]) if params[:status].present?
+
+    @total_expenses = @expenses.sum(:amount)
+    @active_subscriptions_total = @subscriptions.active.sum(:amount)
+    @combined_total = @total_expenses + @active_subscriptions_total
+    @monthly_expenses = @expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
+    @monthly_subscription = @subscriptions.where(billing_cycle: :monthly).sum(:amount)
   end
 
   def show

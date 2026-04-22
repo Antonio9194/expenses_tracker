@@ -1,0 +1,61 @@
+<div class="panel">
+  <div class="panel-header">
+    <div class="panel-title subscriptions-title">
+      <span class="panel-icon"><i class="bi bi-arrow-repeat"></i></span>
+      Subscriptions
+    </div>
+    <%= link_to "+ New", new_subscription_path, class: "btn-new" %>
+  </div>
+  <div class="panel-filters">
+    <%= render "subscription_buttons" %>
+  </div>
+  <div class="panel-scroll">
+    <% if @subscriptions.any? %>
+      <table class="panel-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th class="col-secondary">Billing</th>
+            <th>Status</th>
+            <th style="text-align:right">Amount</th>
+            <th style="text-align:right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @subscriptions.order(start_date: :desc).each do |sub| %>
+            <tr>
+              <td><%= sub.title %></td>
+              <td class="col-secondary">
+                <span class="tag tag-<%= sub.billing_cycle %>"><%= sub.billing_cycle.humanize %></span>
+              </td>
+              <td>
+                <span class="tag tag-<%= sub.status %>"><%= sub.status.humanize %></span>
+              </td>
+              <td style="text-align:right">
+                <span class="amount"><%= number_to_currency(sub.amount) %></span>
+              </td>
+              <td class="action-cell">
+                <%= link_to "Edit", edit_subscription_path(sub), class: "btn-action btn-edit" %>
+                <%= button_to "Delete", subscription_path(sub), method: :delete,
+                          class: "btn-action btn-delete",
+                          form: { class: "inline-form", data: { turbo_confirm: "Delete this subscription?" } } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Active total</td>
+            <td style="text-align:right"><%= number_to_currency(@subscriptions.where(status: :active).sum(:amount)) %></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    <% else %>
+      <div class="empty-state">
+        <div class="empty-icon"><i class="bi bi-arrow-repeat"></i></div>
+        <div>No subscriptions yet</div>
+      </div>
+    <% end %>
+  </div>
+</div>

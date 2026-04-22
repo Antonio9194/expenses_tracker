@@ -1,0 +1,7 @@
+<%= link_to "All", expenses_path(params.permit(:category)), class: "btn-filter #{params[:billing_cycle].blank? ? 'active' : ''}" %>
+<%= link_to "Weekly", expenses_path(params.permit(:category).merge(billing_cycle: "weekly")), class: "btn-filter #{params[:billing_cycle] == 'weekly' ? 'active' : ''}" %>
+<%= link_to "Monthly", expenses_path(params.permit(:category).merge(billing_cycle: "monthly")), class: "btn-filter #{params[:billing_cycle] == 'monthly' ? 'active' : ''}" %>
+<%= link_to "Yearly", expenses_path(params.permit(:category).merge(billing_cycle: "yearly")), class: "btn-filter #{params[:billing_cycle] == 'yearly' ? 'active' : ''}" %>
+<%= link_to "Active", expenses_path(params.permit(:category, :billing_cycle).merge(status: "active")), class: "btn-filter #{params[:status] == 'active' ? 'active' : ''}" %>
+<%= link_to "Paused", expenses_path(params.permit(:category, :billing_cycle).merge(status: "paused")), class: "btn-filter #{params[:status] == 'paused' ? 'active' : ''}" %>
+<%= link_to "Cancelled", expenses_path(params.permit(:category, :billing_cycle).merge(status: "cancelled")), class: "btn-filter #{params[:status] == 'cancelled' ? 'active' : ''}" %>

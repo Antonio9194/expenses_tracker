@@ -1,155 +1,41 @@
 <div class="dashboard">
-
   <!-- Header -->
   <div class="dashboard-header">
     <h1>Overview</h1>
     <span class="header-meta"><%= Date.today.strftime("%B %d, %Y") %></span>
   </div>
-
   <!-- Stats strip -->
   <div class="stats-strip">
-    <div class="stat-card stat-expenses">
-      <div class="stat-label">Total Expenses</div>
-      <div class="stat-value"><%= number_to_currency(@expenses.sum(:amount)) %></div>
+    <div class="stats-row">
+      <div class="stat-card stat-expenses">
+        <div class="stat-label">Total Expenses</div>
+        <div class="stat-value"><%= number_to_currency(@total_expenses) %></div>
+      </div>
+      <div class="stat-card stat-subscriptions">
+        <div class="stat-label">Active Subscriptions</div>
+        <div class="stat-value"><%= number_to_currency(@active_subscriptions_total) %></div>
+      </div>
+      <div class="stat-card stat-total">
+        <div class="stat-label">Combined Total</div>
+        <div class="stat-value"><%= number_to_currency(@combined_total) %></div>
+      </div>
     </div>
-    <div class="stat-card stat-subscriptions">
-      <div class="stat-label">Active Subscriptions</div>
-      <div class="stat-value"><%= number_to_currency(@subscriptions.where(status: :active).sum(:amount)) %></div>
-    </div>
-    <div class="stat-card stat-total">
-      <div class="stat-label">Combined Total</div>
-      <div class="stat-value"><%= number_to_currency(@expenses.sum(:amount) + @subscriptions.where(status: :active).sum(:amount)) %></div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Expense Entries</div>
-      <div class="stat-value"><%= @expenses.count %></div>
+    <div class="stats-row stats-row-center">
+      <div class="stat-card">
+        <div class="stat-label">Total Expenses for <%= Date.today.strftime("%B %Y") %></div>
+        <div class="stat-value"><%= number_to_currency(@monthly_expenses) %></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Active Subscriptions for <%= Date.today.strftime("%B %Y") %></div>
+        <div class="stat-value"><%= number_to_currency(@monthly_subscription) %></div>
+      </div>
     </div>
   </div>
-
   <!-- Two-column panel grid -->
   <div class="panel-grid">
-
     <!-- Expenses panel -->
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title expenses-title">
-          <span class="panel-icon"><i class="bi bi-receipt"></i></span>
-          Expenses
-        </div>
-        <%= link_to "+ New", new_expense_path, class: "btn-new" %>
-      </div>
-
-      <div class="panel-scroll">
-        <% if @expenses.any? %>
-          <table class="panel-table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th class="col-secondary">Category</th>
-                <th class="col-secondary">Date</th>
-                <th style="text-align:right">Amount</th>
-                <th style="text-align:right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @expenses.order(date: :desc).each do |expense| %>
-                <tr>
-                  <td><%= expense.title %></td>
-                  <td class="col-secondary">
-                    <span class="tag tag-category"><%= expense.category.humanize %></span>
-                  </td>
-                  <td class="col-secondary" style="color: var(--text-muted)">
-                    <%= expense.date.strftime("%b %d, %Y") %>
-                  </td>
-                  <td style="text-align:right">
-                    <span class="amount"><%= number_to_currency(expense.amount) %></span>
-                  </td>
-                  <td class="action-cell">
-                    <%= link_to "Edit", edit_expense_path(expense), class: "btn-action btn-edit" %>
-                    <%= button_to "Delete", expense_path(expense), method: :delete,
-                          class: "btn-action btn-delete",
-                          form: { class: "inline-form", data: { turbo_confirm: "Delete this expense?" } } %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3">Total</td>
-                <td style="text-align:right"><%= number_to_currency(@expenses.sum(:amount)) %></td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        <% else %>
-          <div class="empty-state">
-            <div class="empty-icon"><i class="bi bi-receipt"></i></div>
-            <div>No expenses yet</div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
+    <%= render "expenses" %>
     <!-- Subscriptions panel -->
-    <div class="panel">
-      <div class="panel-header">
-        <div class="panel-title subscriptions-title">
-          <span class="panel-icon"><i class="bi bi-arrow-repeat"></i></span>
-          Subscriptions
-        </div>
-        <%= link_to "+ New", new_subscription_path, class: "btn-new" %>
-      </div>
-
-      <div class="panel-scroll">
-        <% if @subscriptions.any? %>
-          <table class="panel-table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th class="col-secondary">Billing</th>
-                <th>Status</th>
-                <th style="text-align:right">Amount</th>
-                <th style="text-align:right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @subscriptions.order(start_date: :desc).each do |sub| %>
-                <tr>
-                  <td><%= sub.title %></td>
-                  <td class="col-secondary">
-                    <span class="tag tag-<%= sub.billing_cycle %>"><%= sub.billing_cycle.humanize %></span>
-                  </td>
-                  <td>
-                    <span class="tag tag-<%= sub.status %>"><%= sub.status.humanize %></span>
-                  </td>
-                  <td style="text-align:right">
-                    <span class="amount"><%= number_to_currency(sub.amount) %></span>
-                  </td>
-                  <td class="action-cell">
-                    <%= link_to "Edit", edit_subscription_path(sub), class: "btn-action btn-edit" %>
-                    <%= button_to "Delete", subscription_path(sub), method: :delete,
-                          class: "btn-action btn-delete",
-                          form: { class: "inline-form", data: { turbo_confirm: "Delete this subscription?" } } %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="3">Active total</td>
-                <td style="text-align:right"><%= number_to_currency(@subscriptions.where(status: :active).sum(:amount)) %></td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
-        <% else %>
-          <div class="empty-state">
-            <div class="empty-icon"><i class="bi bi-arrow-repeat"></i></div>
-            <div>No subscriptions yet</div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
+    <%= render "subscription" %>
   </div>
 </div>
