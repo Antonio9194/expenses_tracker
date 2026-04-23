@@ -82,14 +82,12 @@ body {
   flex-shrink: 0;
 }
 
-/* Centered nav — true center of header regardless of left/right content */
+/* Nav — pushed to the right */
 .header-center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   gap: 0.4rem;
   align-items: center;
+  margin-left: auto;
 }
 
 /* Right side — date + currency */
@@ -434,6 +432,16 @@ form.inline-form { display: inline; }
   border-top: 1px solid var(--border);
 }
 
+.tfoot-total {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.tfoot-total--danger { color: var(--danger); }
+.tfoot-total--accent { color: var(--accent); }
+
 /* ═══════════════════════════════════════════════════════════════════
    TAGS / BADGES
    ═══════════════════════════════════════════════════════════════════ */
@@ -666,7 +674,6 @@ form.inline-form { display: inline; }
 @media (max-width: 768px) {
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .stats-row-center .stat-card { width: calc(50% - 0.5rem); }
-  .header-center { position: static; transform: none; margin: 0 auto; }
   .dashboard-header { flex-wrap: wrap; gap: 0.5rem; }
 }
 
@@ -701,6 +708,22 @@ form.inline-form { display: inline; }
 
   .form-group-row { grid-template-columns: 1fr; }
   .form-actions   { flex-direction: column; }
+}
+
+/* ── iPhone 15 / mid phone (≤ 393px) ──────────────────────────── */
+@media (max-width: 393px) {
+  .dashboard { padding: 0.75rem; }
+
+  /* Stack all stat cards into a single column */
+  .stats-row              { grid-template-columns: 1fr; gap: 0.5rem; }
+  .stats-row-center       { flex-direction: column; gap: 0.5rem; }
+  .stats-row-center .stat-card { width: 100%; }
+
+  .dashboard-header       { flex-wrap: wrap; gap: 0.5rem; }
+
+  /* Panel header stat: shrink slightly */
+  .panel-header-stat      { padding: 0.15rem 0.75rem; }
+  .panel-header-stat-value { font-size: 0.9rem; }
 }
 
 /* ── Small phone (≤ 375px) ─────────────────────────────────────── */

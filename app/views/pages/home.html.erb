@@ -38,7 +38,7 @@
         <div class="stat-value"><%= format_currency(@monthly_expenses) %></div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Active Monthly Subscriptions</div>
+        <div class="stat-label">Active Subscriptions for <%= Date.today.strftime("%B %Y") %></div>
         <div class="stat-value"><%= format_currency(@monthly_subscription) %></div>
       </div>
     </div>
