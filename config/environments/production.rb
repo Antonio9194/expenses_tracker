@@ -3,8 +3,8 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Use SECRET_KEY_BASE env var if provided (Railway), otherwise fall back to credentials.
-  config.secret_key_base = ENV["SECRET_KEY_BASE"] if ENV["SECRET_KEY_BASE"].present?
+  # Use SECRET_KEY_BASE env var if provided, otherwise use fallback key.
+  config.secret_key_base = ENV.fetch("SECRET_KEY_BASE", "cba3d3bdbe06df79303a78939dcc9a477b91b0e57c2074841aa169324e6531278a2b095be95cbbd204491943870839a8d69efe3da54841d8b0a58274ec962446")
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
