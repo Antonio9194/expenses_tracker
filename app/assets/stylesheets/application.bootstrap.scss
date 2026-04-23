@@ -691,13 +691,13 @@ form.inline-form { display: inline; }
 }
 
 /* ── Normal phone (≤ 425px) ────────────────────────────────────── */
-@media (max-width: 425px) {
+@media (max-width: 480px) {
   col.col-secondary,
   .col-secondary { display: none; }
 
   .dashboard { padding: 0.75rem; }
 
-  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .stats-row { grid-template-columns: 1fr; gap: 0.6rem; }
   .stats-row-center { flex-direction: column; }
   .stats-row-center .stat-card { width: 100%; }
 
