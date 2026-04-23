@@ -184,6 +184,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem 1.5rem;
+  text-align: center;
   transition: border-color 0.2s, transform 0.2s;
 
   &:hover {
@@ -703,12 +704,14 @@ form.inline-form { display: inline; }
 
   .stat-card { padding: 0.85rem 1rem; }
 
-  .panel-table { font-size: 0.78rem; }
+  .panel-table { font-size: 0.72rem; }
   .panel-table tbody td,
   .panel-table thead th,
-  .panel-table tfoot td { padding: 0.55rem 0.65rem; }
+  .panel-table tfoot td { padding: 0.45rem 0.35rem; }
 
-  .btn-action { width: 44px; font-size: 0.6rem; }
+  .btn-label { display: none; }
+  .btn-icon  { display: inline; }
+  .btn-action { width: 30px; padding: 0.3rem 0; font-size: 0.75rem; }
   .panel-header { padding: 0.75rem 1rem; }
 
   .panel-filters {
