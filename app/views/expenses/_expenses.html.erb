@@ -37,15 +37,19 @@
             <tr>
               <td><%= expense.title %></td>
               <td><span class="tag tag-category"><%= expense.category.humanize %></span></td>
-              <td style="color: var(--text-muted)"><%= expense.date.strftime("%b %d, %Y") %></td>
+              <td style="color: var(--text-muted)"><%= expense.date.strftime("%b %d") %></td>
               <td class="col-amount">
                 <span class="amount"><%= format_currency(expense.amount) %></span>
               </td>
               <td class="col-actions action-cell">
-                <%= link_to "Edit", edit_expense_path(expense), class: "btn-action btn-edit" %>
-                <%= button_to "Delete", expense_path(expense), method: :delete,
+                <%= link_to edit_expense_path(expense), class: "btn-action btn-edit" do %>
+                  <span class="btn-label">Edit</span><i class="bi bi-pencil btn-icon"></i>
+                <% end %>
+                <%= button_to expense_path(expense), method: :delete,
                           class: "btn-action btn-delete",
-                          form: { class: "inline-form", data: { turbo_confirm: "Delete this expense?" } } %>
+                          form: { class: "inline-form", data: { turbo_confirm: "Delete this expense?" } } do %>
+                  <span class="btn-label">Delete</span><i class="bi bi-trash btn-icon"></i>
+                <% end %>
               </td>
             </tr>
           <% end %>

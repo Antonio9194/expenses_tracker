@@ -331,6 +331,10 @@ body {
 .btn-action.btn-edit:hover   { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 .btn-action.btn-delete:hover { border-color: var(--danger); color: var(--danger); background: rgba(255,77,109,0.1); }
 
+/* Icon shown only on small screens, text shown by default */
+.btn-icon  { display: none; }
+.btn-label { display: inline; }
+
 form.inline-form { display: inline; }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -675,6 +679,15 @@ form.inline-form { display: inline; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .stats-row-center .stat-card { width: calc(50% - 0.5rem); }
   .dashboard-header { flex-wrap: wrap; gap: 0.5rem; }
+
+  .panel-table              { font-size: 0.75rem; }
+  .panel-table thead th,
+  .panel-table tbody td,
+  .panel-table tfoot td     { padding: 0.5rem 0.5rem; }
+
+  .tag                      { padding: 0.15rem 0.35rem; font-size: 0.58rem; }
+  .btn-action               { width: 40px; font-size: 0.62rem; }
+  .btn-action + .btn-action { margin-left: 0.2rem; }
 }
 
 /* ── Normal phone (≤ 425px) ────────────────────────────────────── */
@@ -724,6 +737,40 @@ form.inline-form { display: inline; }
   /* Panel header stat: shrink slightly */
   .panel-header-stat      { padding: 0.15rem 0.75rem; }
   .panel-header-stat-value { font-size: 0.9rem; }
+
+  /* Table: ultra compact */
+  .panel-table            { font-size: 0.68rem; }
+  .panel-table thead th,
+  .panel-table tbody td,
+  .panel-table tfoot td   { padding: 0.4rem 0.15rem 0.4rem 0.5rem; }
+
+  /* Last column (actions) tighter on the right */
+  .panel-table thead th:last-child,
+  .panel-table tbody td:last-child,
+  .panel-table tfoot td:last-child { padding-right: 0.25rem; }
+
+  /* Tighten gap between category (2nd) and date (3rd) */
+  .panel-table thead th:nth-child(2),
+  .panel-table tbody td:nth-child(2) { padding-right: 0.05rem; }
+
+  .panel-table thead th:nth-child(3),
+  .panel-table tbody td:nth-child(3) { padding-left: 0.05rem; }
+
+  /* Truncate long titles with ellipsis */
+  .panel-table tbody td:first-child {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tag                    { padding: 0.1rem 0.25rem; font-size: 0.55rem; }
+
+  /* Swap text for icons on action buttons */
+  .btn-label              { display: none; }
+  .btn-icon               { display: inline; font-size: 0.75rem; }
+  .btn-action             { width: 28px; padding: 0.25rem 0; }
+  .btn-action + .btn-action { margin-left: 0.15rem; }
 }
 
 /* ── Small phone (≤ 375px) ─────────────────────────────────────── */

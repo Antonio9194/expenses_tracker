@@ -17,7 +17,7 @@ user = User.create!(
 expenses = [
   # Food / convenience stores
   { title: "Tobu Food",        amount: 1645,  category: :food,          date: "2026-04-01" },
-  { title: "Tobu Supermarket", amount: 2717,  category: :food,          date: "2026-04-01" },
+  { title: "Tobu Market",      amount: 2717,  category: :food,          date: "2026-04-01" },
   { title: "Starbucks",        amount: 720,   category: :food,          date: "2026-04-02" },
   { title: "Lunch",            amount: 1460,  category: :food,          date: "2026-04-02" },
   { title: "Lawson",           amount: 693,   category: :food,          date: "2026-04-03" },
@@ -66,7 +66,7 @@ expenses = [
   # Health
   { title: "Medicine",         amount: 1180,  category: :health,        date: "2026-04-02" },
   { title: "Medicine",         amount: 4952,  category: :health,        date: "2026-04-03" },
-  { title: "Dental Clinic",    amount: 2570,  category: :health,        date: "2026-04-21" },
+  { title: "Dentist",          amount: 2570,  category: :health,        date: "2026-04-21" },
 
   # Transport
   { title: "Suica Charge",     amount: 1000,  category: :transport,     date: "2026-04-03" },
@@ -109,9 +109,9 @@ subscriptions = [
   { title: "Amazon Prime",   amount: 5900,  billing_cycle: :yearly,  status: :active,    start_date: "2023-08-20" },
   { title: "NordVPN",        amount: 4900,  billing_cycle: :yearly,  status: :active,    start_date: "2024-05-10" },
   # Yearly — cancelled
-  { title: "Microsoft 365",  amount: 14900, billing_cycle: :yearly,  status: :cancelled, start_date: "2021-09-01" },
+  { title: "MS 365",         amount: 14900, billing_cycle: :yearly,  status: :cancelled, start_date: "2021-09-01" },
   # Weekly — active
-  { title: "Duolingo Plus",  amount: 480,   billing_cycle: :weekly,  status: :active,    start_date: "2025-01-06" },
+  { title: "Duolingo+",      amount: 480,   billing_cycle: :weekly,  status: :active,    start_date: "2025-01-06" },
   # Weekly — paused
   { title: "News Digest",    amount: 300,   billing_cycle: :weekly,  status: :paused,    start_date: "2024-10-01" },
 ]

@@ -12,5 +12,6 @@ class Expense < ApplicationRecord
 }
 
   validates :title, :category, :date, presence: true
+  validates :title, length: { maximum: 12 }
   validates :amount, presence: true, numericality: { greater_than: 0 }
 end
