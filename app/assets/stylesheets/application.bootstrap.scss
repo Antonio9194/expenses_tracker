@@ -726,6 +726,28 @@ form.inline-form { display: inline; }
   .form-actions   { flex-direction: column; }
 }
 
+/* ── iPhone 16/17 Pro (≤ 410px) ───────────────────────────────── */
+@media (max-width: 410px) {
+  .panel-table            { font-size: 0.7rem; }
+  .panel-table thead th,
+  .panel-table tbody td,
+  .panel-table tfoot td   { padding: 0.45rem 0.2rem; }
+
+  .panel-table tbody td:first-child {
+    max-width: 85px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .btn-label              { display: none; }
+  .btn-icon               { display: inline; font-size: 0.75rem; }
+  .btn-action             { width: 28px; padding: 0.25rem 0; }
+  .btn-action + .btn-action { margin-left: 0.15rem; }
+
+  .tag                    { padding: 0.1rem 0.2rem; font-size: 0.56rem; }
+}
+
 /* ── iPhone 15 / mid phone (≤ 393px) ──────────────────────────── */
 @media (max-width: 393px) {
   .dashboard { padding: 0.75rem; }
