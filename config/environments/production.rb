@@ -81,6 +81,6 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
-  # Allow Railway domains
-  config.hosts << /.*\.railway\.app/
+  # Allow all hosts (Railway handles security at the proxy level)
+  config.hosts.clear
 end
