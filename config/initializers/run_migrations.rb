@@ -4,10 +4,7 @@ if Rails.env.production?
     ActiveRecord::Migration.check_all_pending!
   rescue ActiveRecord::PendingMigrationError
     Rails.logger.info "Running pending migrations..."
-    ActiveRecord::MigrationContext.new(
-      Rails.root.join("db/migrate"),
-      ActiveRecord::SchemaMigration
-    ).migrate
+    ActiveRecord::Tasks::DatabaseTasks.migrate
     Rails.logger.info "Migrations complete."
   end
 end
