@@ -3,9 +3,6 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Explicitly set secret_key_base from env var (Railway injects this)
-  config.secret_key_base = ENV["SECRET_KEY_BASE"]
-
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
