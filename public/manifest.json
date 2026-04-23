@@ -1,0 +1,23 @@
+{
+  "name": "Expenses Tracker",
+  "short_name": "Expenses",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "description": "Track your expenses and subscriptions.",
+  "theme_color": "#0d0f14",
+  "background_color": "#0d0f14"
+}
