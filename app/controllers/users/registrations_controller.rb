@@ -5,4 +5,7 @@ class Users::RegistrationsController < ApplicationController
     current_user.update(currency: params[:currency])
     redirect_back fallback_location: root_path
   end
+
+  def confirm_cancel
+  end
 end

@@ -1,0 +1,17 @@
+<turbo-frame id="modal">
+  <div class="modal-backdrop">
+    <div class="form-card modal-card">
+      <div class="form-card-header">
+        <span class="form-card-icon">
+          <i class="bi bi-person-x"></i>
+        </span>
+        <h2 class="form-card-title">Cancel Account</h2>
+      </div>
+      <p class="form-subtitle">Are you sure you want to cancel your account? All your data will be permanently deleted.</p>
+      <div class="form-actions">
+        <%= link_to "Keep my account", edit_user_registration_path, class: "btn-cancel", data: { turbo_frame: "modal" } %>
+        <%= button_to "Cancel my account", registration_path(resource_name), method: :delete, class: "btn-submit btn-danger" %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>
