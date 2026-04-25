@@ -1,0 +1,36 @@
+
+  <div class="modal-backdrop">
+    <div class="form-card modal-card">
+      <div class="form-card-header">
+        <span class="form-card-icon icon-accent"><i class="bi bi-receipt"></i></span>
+        <h2 class="form-card-title">
+          <%= @expense.new_record? ? "New Expense" : "Edit Expense" %>
+          </h2>
+      </div>
+
+      <%= simple_form_for @expense, html: { class: "premium-form" } do |f| %>
+        <div class="form-group-row">
+          <div class="form-field">
+            <%= f.input :title, label: "Title", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
+          </div>
+          <div class="form-field">
+            <%= f.input :amount, label: "Amount", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
+          </div>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-field">
+            <%= f.input :category, collection: Expense.categories.keys, label: "Category", input_html: { class: "premium-input premium-select" }, wrapper_html: { class: "field-wrapper" } %>
+          </div>
+          <div class="form-field">
+            <%= f.input :date, label: "Date", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Save Expense", class: "btn-submit" %>
+          <%= link_to "Cancel", expenses_path, class: "btn-cancel", data: { turbo_frame: "modal" } %>
+        </div>
+      <% end %>
+    </div>
+  </div>

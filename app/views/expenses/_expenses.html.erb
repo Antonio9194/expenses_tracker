@@ -42,7 +42,7 @@
                 <span class="amount"><%= format_currency(expense.amount) %></span>
               </td>
               <td class="col-actions action-cell">
-                <%= link_to edit_expense_path(expense), class: "btn-action btn-edit" do %>
+                <%= link_to edit_expense_path(expense), class: "btn-action btn-edit", data: { turbo_frame: "modal" } do %>
                   <span class="btn-label">Edit</span><i class="bi bi-pencil btn-icon"></i>
                 <% end %>
                 <%= link_to confirm_destroy_expense_path(expense),
