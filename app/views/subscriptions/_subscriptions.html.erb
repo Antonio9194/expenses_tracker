@@ -45,9 +45,9 @@
                 <%= link_to edit_subscription_path(sub), class: "btn-action btn-edit" do %>
                   <span class="btn-label">Edit</span><i class="bi bi-pencil btn-icon"></i>
                 <% end %>
-                <%= button_to subscription_path(sub), method: :delete,
-                          class: "btn-action btn-delete",
-                          form: { class: "inline-form", data: { turbo_confirm: "Delete this subscription?" } } do %>
+                <%= link_to confirm_destroy_subscription_path(sub),
+                            class: "btn-action btn-delete",
+                            data: { turbo_frame: "modal" } do %>
                   <span class="btn-label">Delete</span><i class="bi bi-trash btn-icon"></i>
                 <% end %>
               </td>

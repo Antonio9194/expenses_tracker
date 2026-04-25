@@ -29,6 +29,7 @@
 
   <body>
     <%= yield %>
+    <turbo-frame id="modal"></turbo-frame>
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/sw.js", { scope: "/" });

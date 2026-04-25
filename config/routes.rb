@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   devise_for :users
   patch "update_currency", to: "users/registrations#update_currency", as: :update_currency
   resources :expenses
-  resources :subscriptions
+  resources :subscriptions do
+    member do
+      get :confirm_destroy
+    end
+  end
   root "pages#home"
 end

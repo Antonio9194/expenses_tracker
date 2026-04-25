@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_subscription, only: [ :show, :edit, :update, :destroy, :confirm_destroy ]
   before_action :authenticate_user!
 
   def index
@@ -44,7 +44,10 @@ class SubscriptionsController < ApplicationController
 
   def destroy
     @subscription.destroy
-    redirect_to root_path
+    redirect_to subscriptions_path
+  end
+
+  def confirm_destroy
   end
 
   private
