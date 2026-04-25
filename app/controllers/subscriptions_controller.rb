@@ -23,7 +23,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
     if @subscription.save
-      redirect_to root_path
+      redirect_to subscriptions_path
     else
       flash[:alert] = "Something went wrong"
       render :new
@@ -35,7 +35,7 @@ class SubscriptionsController < ApplicationController
 
   def update
     if @subscription.update(subscription_params)
-      redirect_to root_path
+      redirect_to subscriptions_path
     else
       flash[:alert] = "Something went wrong"
       render :edit
