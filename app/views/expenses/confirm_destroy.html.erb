@@ -1,0 +1,17 @@
+<turbo-frame id="modal">
+  <div class="modal-backdrop">
+    <div class="form-card modal-card">
+      <div class="form-card-header">
+        <span class="form-card-icon">
+          <i class="bi bi-trash"></i>
+        </span>
+        <h2 class="form-card-title">Delete Expense</h2>
+      </div>
+      <p class="form-subtitle">Are you sure you want to delete <strong><%= @expense.title %></strong>? This action cannot be undone.</p>
+      <div class="form-actions">
+        <%= link_to "Cancel", expenses_path, class: "btn-cancel", data: { turbo_frame: "modal" } %>
+        <%= link_to "Delete", expense_path(@expense), class: "btn-submit btn-danger", data: { turbo_method: :delete } %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

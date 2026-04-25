@@ -1,5 +1,5 @@
 class ExpensesController < ApplicationController
-  before_action :set_expense, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_expense, only: [ :show, :edit, :update, :destroy, :confirm_destroy ]
   before_action :authenticate_user!
   def index
     all_expenses      = (current_user.admin? ? Expense.all : current_user.expenses).order(date: :desc)
@@ -40,6 +40,9 @@ class ExpensesController < ApplicationController
   def destroy
     @expense.destroy
     redirect_to expenses_path
+  end
+
+  def confirm_destroy
   end
 
   private
