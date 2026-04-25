@@ -447,6 +447,22 @@ form.inline-form { display: inline; }
 .tfoot-total--danger { color: var(--danger); }
 .tfoot-total--accent { color: var(--accent); }
 
+.tfoot-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+@media (max-width: 480px) {
+  .tfoot-label { font-size: 0.62rem; letter-spacing: 0.05em; }
+}
+
+@media (max-width: 375px) {
+  .tfoot-label { font-size: 0.58rem; }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    TAGS / BADGES
    ═══════════════════════════════════════════════════════════════════ */
