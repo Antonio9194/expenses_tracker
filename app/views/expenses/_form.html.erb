@@ -28,8 +28,8 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Save Expense", class: "btn-submit" %>
-          <%= link_to "Cancel", expenses_path, class: "btn-cancel", data: { turbo_frame: "modal" } %>
+          <%= f.button :submit, "Save Expense", class: "btn-submit", data: { turbo_frame: "_top"} %>
+          <%= link_to "Cancel", expenses_path, class: "btn-cancel", data: { turbo_frame: "modal", turbo_frame: "_top" } %>
         </div>
       <% end %>
     </div>
