@@ -6,6 +6,7 @@ class ExpensesController < ApplicationController
     @monthly_expenses = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
     @expenses         = all_expenses
     @expenses         = @expenses.where(category: params[:category]) if params[:category].present?
+    @expenses         = @expenses.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
   end
 
   def show
