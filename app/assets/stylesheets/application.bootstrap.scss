@@ -386,6 +386,10 @@ form.inline-form { display: inline; }
 .panel-table tbody td:first-child,
 .panel-table tfoot td:first-child { width: 100%; }
 
+.subscription-table thead th:first-child,
+.subscription-table tbody td:first-child,
+.subscription-table tfoot td:first-child { width: auto; }
+
 .col-amount {
   text-align: right;
   white-space: nowrap;

@@ -15,9 +15,9 @@
   </div>
   <div class="panel-scroll">
     <% if @subscriptions.any? %>
-      <table class="panel-table">
+      <table class="panel-table subscription-table">
         <colgroup>
-          <col class="col-title">
+          <col style="width: auto;">
           <col class="col-secondary">
           <col class="col-status">
           <col class="col-amount">
@@ -35,7 +35,7 @@
         <tbody>
           <% @subscriptions.order(start_date: :desc).each do |sub| %>
             <tr>
-              <td><%= sub.title %></td>
+              <td class="subscription-title-col"><%= sub.title %></td>
               <td><span class="tag tag-<%= sub.billing_cycle %>"><%= sub.billing_cycle.humanize %></span></td>
               <td><span class="tag tag-<%= sub.status %>"><%= sub.status.humanize %></span></td>
               <td class="col-amount">
