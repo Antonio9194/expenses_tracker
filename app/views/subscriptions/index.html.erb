@@ -15,6 +15,10 @@
       <% end %>
     </div>
   </div>
+  <%= form_with url: subscriptions_path, method: :get, class: "search-bar" do |f| %>
+    <%= f.text_field :query, value: params[:query], placeholder: "Search subscriptions...", class: "search-bar-input" %>
+    <%= f.submit "Search", class: "search-bar-btn" %>
+  <% end %>
   <div class="panel-grid">
     <%= render "subscriptions" %>
   </div>

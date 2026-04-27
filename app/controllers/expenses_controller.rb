@@ -2,9 +2,8 @@ class ExpensesController < ApplicationController
   before_action :set_expense, only: [ :show, :edit, :update, :destroy, :confirm_destroy ]
   before_action :authenticate_user!
   def index
-    all_expenses      = (current_user.admin? ? Expense.all : current_user.expenses).order(date: :desc)
-    @monthly_expenses = all_expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
-    @expenses         = all_expenses
+    @expenses      = (current_user.admin? ? Expense.all : current_user.expenses).order(date: :desc)
+    @monthly_expenses = @expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
     @expenses         = @expenses.where(category: params[:category]) if params[:category].present?
     @expenses         = @expenses.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
   end
