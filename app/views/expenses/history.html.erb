@@ -28,11 +28,13 @@
           </div>
           <div class="panel-header-stat-value"><%= format_currency(@expenses_sum) %></div>
         </div>
-        <%= form_with url: history_expenses_path, method: :get do |f| %>
+      </div>
+      <div class="panel-filters history-filters">
+        <%= form_with url: history_expenses_path, method: :get, class: "history-month-form" do |f| %>
           <%= f.select :month,
           [["All months", ""]] + @months.map { |m| [m.month.strftime("%B %Y"), m.month.strftime("%Y-%m-%d")] },
           { selected: params[:month] },
-          { class: "currency-select btn-months", onchange: "this.form.submit()" } %>
+          { class: "history-month-select", onchange: "this.form.submit()" } %>
         <% end %>
       </div>
       <div class="panel-scroll">
@@ -59,7 +61,7 @@
                 <tr>
                   <td><%= expense.title %></td>
                   <td><span class="tag tag-category"><%= expense.category.humanize %></span></td>
-                  <td style="color: var(--text-muted)"><%= expense.date.strftime("%b %d, %Y") %></td>
+                  <td style="color: var(--text-muted)"><%= expense.date.strftime("%b '%y") %></td>
                   <td class="col-amount">
                     <span class="amount"><%= format_currency(expense.amount) %></span>
                   </td>

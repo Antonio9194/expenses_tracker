@@ -30,7 +30,10 @@
       </div>
       <div class="budget-card-right">
         <% if @budget.enabled? %>
-          <%= link_to "Edit", edit_budget_path, class: "budget-edit-link", data: { turbo_frame: "modal" } %>
+          <%= link_to edit_budget_path, class: "budget-edit-link", data: { turbo_frame: "modal" } do %>
+            <span class="btn-label">Edit</span>
+            <i class="bi bi-pencil btn-icon"></i>
+          <% end %>
         <% end %>
         <%= link_to toggle_budget_path, class: "budget-toggle #{@budget.enabled? ? 'budget-toggle--on' : ''}", data: { turbo_method: :patch } do %>
           <span class="budget-toggle-track">

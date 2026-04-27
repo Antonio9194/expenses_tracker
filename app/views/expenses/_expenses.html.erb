@@ -9,8 +9,14 @@
       <div class="panel-header-stat-value"><%= format_currency(@monthly_expenses_sum) %></div>
     </div>
     <div class="panel-actions">
-      <%= link_to "History", history_expenses_path, class: "btn-history" %>
-      <%= link_to "+ New", new_expense_path, class: "btn-new", data: { turbo_frame: "modal" } %>
+      <%= link_to history_expenses_path, class: "btn-history" do %>
+        <span class="btn-label">History</span>
+        <i class="bi bi-clock-history btn-icon"></i>
+      <% end %>
+      <%= link_to new_expense_path, class: "btn-new", data: { turbo_frame: "modal" } do %>
+        <span class="btn-label">+ New</span>
+        <i class="bi bi-plus btn-icon"></i>
+      <% end %>
     </div>
   </div>
   <div class="panel-filters">

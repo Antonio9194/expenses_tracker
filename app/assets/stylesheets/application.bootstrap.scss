@@ -895,6 +895,9 @@ form.inline-form { display: inline; }
 }
 
 .budget-edit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--text-muted);
@@ -903,6 +906,8 @@ form.inline-form { display: inline; }
   border-radius: var(--radius-xs);
   padding: 0.25rem 0.65rem;
   transition: color 0.15s, border-color 0.15s;
+
+  .btn-icon { display: none; }
 
   &:hover { color: var(--accent); border-color: var(--accent); }
 }
@@ -943,6 +948,39 @@ form.inline-form { display: inline; }
   background: #fff;
 }
 
+/* ── History month filter ───────────────────────────────────────── */
+.history-filters {
+  padding: 0.6rem 1.25rem;
+}
+
+.history-month-form {
+  width: 100%;
+}
+
+.history-month-select {
+  width: 100%;
+  background: var(--bg-card-alt);
+  border: 1px solid rgba(108,99,255,0.3);
+  border-radius: var(--radius-xs);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &:hover, &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  option {
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+  }
+}
+
 /* ── Panel actions (History + New buttons) ──────────────────────── */
 .panel-actions {
   display: flex;
@@ -954,9 +992,12 @@ form.inline-form { display: inline; }
 @media (max-width: 480px) {
   .budget-card { padding: 0.85rem 1rem; }
   .budget-card-amount { font-size: 0.95rem; }
-  .budget-edit-link { display: none; }
-
-  .btn-history { display: none; }
+  .budget-edit-link {
+    display: inline-flex;
+    padding: 0.25rem 0.5rem;
+    .btn-label { display: none; }
+    .btn-icon  { display: inline; font-size: 0.85rem; }
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════
