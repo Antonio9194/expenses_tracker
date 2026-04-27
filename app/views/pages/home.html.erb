@@ -16,6 +16,30 @@
       <% end %>
     </div>
   </div>
+  <div class="budget-strip">
+    <div class="budget-card <%= 'budget-enabled' if @budget.enabled? %>">
+      <div class="budget-card-left">
+        <span class="budget-card-label">Monthly Budget</span>
+        <span class="budget-card-amount">
+          <% if @budget.enabled? && @budget.amount.present? %>
+            <%= format_currency(@budget.amount) %>
+          <% else %>
+            Not set
+          <% end %>
+        </span>
+      </div>
+      <div class="budget-card-right">
+        <% if @budget.enabled? %>
+          <%= link_to "Edit", edit_budget_path, class: "budget-edit-link", data: { turbo_frame: "modal" } %>
+        <% end %>
+        <%= link_to toggle_budget_path, class: "budget-toggle #{@budget.enabled? ? 'budget-toggle--on' : ''}", data: { turbo_method: :patch } do %>
+          <span class="budget-toggle-track">
+            <span class="budget-toggle-thumb"></span>
+          </span>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <!-- Stats strip -->
   <div class="stats-strip">
     <div class="stats-row">

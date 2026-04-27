@@ -8,4 +8,5 @@ class User < ApplicationRecord
 
          has_many :expenses
          has_many :subscriptions
+         has_one :budget
 end

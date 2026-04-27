@@ -17,5 +17,8 @@ Rails.application.routes.draw do
       get :confirm_destroy
     end
   end
+  resource :budget do
+      patch :toggle
+  end
   root "pages#home"
 end

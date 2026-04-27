@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   def home
     @expenses      = (current_user.admin? ? Expense.all      : current_user.expenses).order(date: :desc)
     @subscriptions = (current_user.admin? ? Subscription.all : current_user.subscriptions).order(start_date: :desc)
+    @budget = current_user.budget || current_user.build_budget
 
     # Stats always use the full unfiltered collections
     @yearly_expenses = @expenses.where(date: Date.today.beginning_of_year..Date.today.end_of_year).sum(:amount)
