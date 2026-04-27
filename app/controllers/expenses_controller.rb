@@ -4,9 +4,10 @@ class ExpensesController < ApplicationController
   def index
     @expenses      = (current_user.admin? ? Expense.all : current_user.expenses).order(date: :desc)
     @monthly_expenses = @expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month)
-    @monthly_expenses_sum = @expenses.where(date: Date.today.beginning_of_month..Date.today.end_of_month).sum(:amount)
-    @expenses         = @expenses.where(category: params[:category]) if params[:category].present?
-    @expenses         = @expenses.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
+    @monthly_expenses_sum = @monthly_expenses.sum(:amount)
+
+    @monthly_expenses         = @monthly_expenses.where(category: params[:category]) if params[:category].present?
+    @monthly_expenses         = @monthly_expenses.where("title ILIKE ?", "%#{params[:query]}%") if params[:query].present?
   end
 
   def show

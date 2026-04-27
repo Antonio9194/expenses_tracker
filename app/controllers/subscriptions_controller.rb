@@ -5,8 +5,7 @@ class SubscriptionsController < ApplicationController
   def index
     @subscriptions = (current_user.admin? ? Subscription.all : current_user.subscriptions).order(start_date: :desc)
 
-    @active_subscriptions_total = @subscriptions.active.sum(:amount)
-    @monthly_subscription     = @subscriptions.active.where(billing_cycle: :monthly).sum(:amount)
+    @monthly_subscription_sum    = @subscriptions.active.where(billing_cycle: :monthly).sum(:amount)
 
     @subscriptions = @subscriptions.where(billing_cycle: params[:billing_cycle]) if params[:billing_cycle].present?
     @subscriptions = @subscriptions.where(status: params[:status]) if params[:status].present?

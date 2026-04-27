@@ -25,7 +25,7 @@
       </div>
       <div class="stat-card stat-subscriptions">
         <div class="stat-label">Active Subscriptions for <%= Date.today.strftime("%Y") %></div>
-        <div class="stat-value"><%= format_currency(@active_subscriptions_total) %></div>
+        <div class="stat-value"><%= format_currency(@active_subscriptions_sum) %></div>
       </div>
       <div class="stat-card stat-total">
         <div class="stat-label">Combined Total</div>
@@ -39,7 +39,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-label">Active Subscriptions for <%= Date.today.strftime("%B %Y") %></div>
-        <div class="stat-value"><%= format_currency(@monthly_subscription) %></div>
+        <div class="stat-value"><%= format_currency(@monthly_subscription_sum) %></div>
       </div>
     </div>
   </div>
