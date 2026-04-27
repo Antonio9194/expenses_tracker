@@ -6,7 +6,7 @@
     </div>
     <div class="panel-header-stat">
       <div class="panel-header-stat-label"><%= Date.today.strftime("%B %Y") %></div>
-      <div class="panel-header-stat-value"><%= format_currency(@monthly_expenses) %></div>
+      <div class="panel-header-stat-value"><%= format_currency(@monthly_expenses_sum) %></div>
     </div>
     <%= link_to "+ New", new_expense_path, class: "btn-new", data: { turbo_frame: "modal" } %>
   </div>
@@ -14,7 +14,7 @@
     <%= render "search_buttons" %>
   </div>
   <div class="panel-scroll">
-    <% if @expenses.any? %>
+    <% if @monthly_expenses.any? %>
       <table class="panel-table">
         <colgroup>
           <col class="col-title">
@@ -33,7 +33,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @expenses.each do |expense| %>
+          <% @monthly_expenses.each do |expense| %>
             <tr>
               <td><%= expense.title %></td>
               <td><span class="tag tag-category"><%= expense.category.humanize %></span></td>
@@ -59,7 +59,7 @@
             <td class="tfoot-label">Total</td>
             <td></td>
             <td></td>
-            <td class="col-amount tfoot-total tfoot-total--danger"><%= format_currency(@monthly_expenses) %></td>
+            <td class="col-amount tfoot-total tfoot-total--danger"><%= format_currency(@monthly_expenses_sum) %></td>
             <td></td>
           </tr>
         </tfoot>
