@@ -4,7 +4,7 @@
       <span class="form-card-icon icon-accent"><i class="bi bi-wallet2"></i></span>
       <h2 class="form-card-title">Set Budget</h2>
     </div>
-    <%= simple_form_for @budget, url: budget_path, method: :patch, html: { class: "premium-form" } do |f| %>
+    <%= simple_form_for @budget, url: budget_path, method: :patch, html: { class: "premium-form", data: { turbo_frame: "_top" } } do |f| %>
       <%= f.hidden_field :enabled, value: true %>
       <%= f.input :amount, label: "Monthly Budget", input_html: { class: "premium-input" }, wrapper_html: { class: "field-wrapper" } %>
       <div class="form-actions">

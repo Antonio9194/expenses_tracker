@@ -90,6 +90,7 @@ body {
   margin-left: auto;
 }
 
+
 /* Right side — date + currency */
 .header-right {
   margin-left: auto;
@@ -97,6 +98,13 @@ body {
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
+}
+
+.dashboard-header-3col .header-right {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-left: 0;
+  justify-content: space-between;
 }
 
 .header-meta {
@@ -634,6 +642,18 @@ form.inline-form { display: inline; }
   transition: opacity 0.15s;
 
   &:hover { opacity: 0.85; }
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.15s;
+
+  &:hover { color: var(--danger); }
 }
 
 .btn-cancel {

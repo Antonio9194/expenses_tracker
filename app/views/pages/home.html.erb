@@ -7,12 +7,15 @@
       <%= link_to "Subscriptions", subscriptions_path, class: "btn-filter" %>
     </nav>
     <div class="header-right">
-      <span class="header-meta"><%= Date.today.strftime("%B %d, %Y") %></span>
       <%= form_with url: update_currency_path, method: :patch, html: { class: "currency-switcher", "data-turbo" => "false" } do |f| %>
         <%= f.select :currency,
             [["$ USD", "USD"], ["€ EUR", "EUR"], ["£ GBP", "GBP"], ["¥ JPY", "JPY"], ["¥ CNY", "CNY"]],
             { selected: current_user.currency },
             { class: "currency-select", onchange: "this.form.submit()" } %>
+      <% end %>
+      <span class="header-meta"><%= Date.today.strftime("%B %d, %Y") %></span>
+      <%= button_to destroy_user_session_path, method: :delete, class: "btn-logout", form: { style: "display:inline" } do %>
+        <i class="bi bi-box-arrow-right"></i>
       <% end %>
     </div>
   </div>

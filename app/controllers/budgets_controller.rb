@@ -29,7 +29,8 @@ class BudgetsController < ApplicationController
   end
 
   def toggle
-    @budget.update(enabled: !@budget.enabled)
+    @budget.enabled = !@budget.enabled
+    @budget.save(validate: false)
     redirect_to root_path
   end
 
