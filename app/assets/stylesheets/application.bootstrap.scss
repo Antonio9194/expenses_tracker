@@ -914,7 +914,7 @@ form.inline-form { display: inline; }
 }
 
 /* ── Toggle switch ─────────────────────────────────────────────── */
-.budget-toggle { display: flex; align-items: center; text-decoration: none; }
+.budget-toggle { display: flex; align-items: center; text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; }
 
 .budget-toggle-track {
   position: relative;
