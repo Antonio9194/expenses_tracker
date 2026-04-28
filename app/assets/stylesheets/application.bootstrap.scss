@@ -63,10 +63,11 @@ body {
    HEADER
    ═══════════════════════════════════════════════════════════════════ */
 .dashboard-header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  min-height: 56px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 48px;
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
@@ -79,30 +80,36 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  flex-shrink: 0;
 }
 
-/* Nav — center column */
+/* Nav */
 .header-center {
   display: flex;
   gap: 0.4rem;
   align-items: center;
-  justify-content: center;
-  margin-left: 0;
+  margin-left: auto;
 }
 
 /* Right side — currency + date + logout */
 .header-right {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 1rem;
-  margin-left: 0;
+  flex-shrink: 0;
 }
 
-.dashboard-header-3col .header-right {
-  grid-column: unset;
-  width: auto;
-  justify-content: flex-end;
+@media (min-width: 769px) {
+  .dashboard-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    flex-wrap: unset;
+    gap: 0;
+    min-height: 56px;
+  }
+
+  .header-center { justify-content: center; margin-left: 0; }
+  .header-right  { justify-content: flex-end; }
 }
 
 .header-meta {
@@ -734,7 +741,6 @@ form.inline-form { display: inline; }
 
 /* ── Large phone (≤ 768px) ─────────────────────────────────────── */
 @media (max-width: 768px) {
-  .dashboard-header { flex-wrap: wrap; gap: 0.5rem; }
 
   .panel-table              { font-size: 0.75rem; }
   .panel-table thead th,
