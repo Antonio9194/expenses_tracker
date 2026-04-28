@@ -873,6 +873,35 @@ form.inline-form { display: inline; }
   margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
 }
 
+.progress-track {
+  width: 100%;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: clamp(0.5rem, 1.5vw, 0.75rem);
+  margin-bottom: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent), #a78bfa);
+  transition: width 3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 0.5rem;
+}
+
+.progress-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
 .budget-card {
   background: var(--bg-card);
   border: 1px solid var(--border);

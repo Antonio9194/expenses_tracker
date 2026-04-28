@@ -1,0 +1,7 @@
+<% if @budget.present? && @budget.enabled? %>
+  <div class="progress-track" data-controller="budget-bar" data-budget-bar-percentage-value= "<%= @budget_percentage %>" >
+    <div class="progress-fill" data-budget-bar-target="fill" style="width: <%= @budget_percentage %>%">
+      <span class="progress-label"><%= @budget_percentage.round %>%</span>
+    </div>
+  </div>
+<% end %>
