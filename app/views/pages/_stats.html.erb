@@ -1,0 +1,26 @@
+<div class="stats-strip">
+  <div class="stats-row">
+    <div class="stat-card stat-expenses">
+      <div class="stat-label">Total Expenses for <%= Date.today.strftime("%Y") %></div>
+      <div class="stat-value"><%= format_currency(@yearly_expenses) %></div>
+    </div>
+    <div class="stat-card stat-subscriptions">
+      <div class="stat-label">Active Subscriptions for <%= Date.today.strftime("%Y") %></div>
+      <div class="stat-value"><%= format_currency(@active_subscriptions_sum) %></div>
+    </div>
+    <div class="stat-card stat-total">
+      <div class="stat-label">Combined Total</div>
+      <div class="stat-value"><%= format_currency(@combined_total) %></div>
+    </div>
+  </div>
+  <div class="stats-row stats-row-center">
+    <div class="stat-card">
+      <div class="stat-label">Expenses for <%= Date.today.strftime("%B %Y") %></div>
+      <div class="stat-value"><%= format_currency(@monthly_expenses_sum) %></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Active Subscriptions for <%= Date.today.strftime("%B %Y") %></div>
+      <div class="stat-value"><%= format_currency(@monthly_subscription_sum) %></div>
+    </div>
+  </div>
+</div>
