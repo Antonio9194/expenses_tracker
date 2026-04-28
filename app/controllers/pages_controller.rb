@@ -11,6 +11,7 @@ class PagesController < ApplicationController
     @monthly_subscription_sum = @subscriptions.active.where(billing_cycle: :monthly).sum(:amount)
     @budget_percentage = (@monthly_expenses_sum + @monthly_subscription_sum) / @monthly_budget * 100
     @savings = @monthly_budget - (@monthly_expenses_sum + @monthly_subscription_sum)
+    @daily_limit = @savings / (Date.today.end_of_month.day - Date.today.day)
 
     @yearly_expenses = @expenses.where(date: Date.today.beginning_of_year..Date.today.end_of_year).sum(:amount)
     @active_subscriptions_sum = @subscriptions.active.sum(:amount)
