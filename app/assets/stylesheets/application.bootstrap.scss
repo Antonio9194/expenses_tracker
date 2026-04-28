@@ -99,6 +99,12 @@ body {
   flex-shrink: 0;
 }
 
+.dashboard-header-3col .header-right {
+  width: 100%;
+  margin-left: 0;
+  justify-content: space-between;
+}
+
 @media (min-width: 769px) {
   .dashboard-header {
     display: grid;
