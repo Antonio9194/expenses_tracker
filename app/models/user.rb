@@ -8,5 +8,6 @@ class User < ApplicationRecord
 
          has_many :expenses
          has_many :subscriptions
+         has_many :monthly_snapshots
          has_one :budget
 end

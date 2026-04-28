@@ -14,11 +14,14 @@ class ExpensesController < ApplicationController
   def history
     @expenses = (current_user.admin? ? Expense.all : current_user.expenses).order(date: :desc)
     @months = @expenses.unscope(:order).select("DATE_TRUNC('month', date) AS month").distinct.order(Arel.sql("DATE_TRUNC('month', date) DESC"))
+    @monthly_snapshots = current_user.admin? ? MonthlySnapshot.all : current_user.monthly_snapshots
 
     if params[:month].present?
       date = Date.parse(params[:month])
       @expenses = @expenses.where(date: date.beginning_of_month..date.end_of_month)
     end
+
+    @expenses = @expenses.where(category: params[:category]) if params[:category].present?
     @expenses_sum = @expenses.sum(:amount)
   end
 

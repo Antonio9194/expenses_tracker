@@ -1,0 +1,9 @@
+<%= link_to "All",           history_expenses_path(params.permit(:month)),                                          class: "btn-filter #{params[:category].blank? ? 'active' : ''}" %>
+<%= link_to "Housing",       history_expenses_path(params.permit(:month).merge(category: "housing")),       class: "btn-filter #{params[:category] == 'housing'       ? 'active' : ''}" %>
+<%= link_to "Food",          history_expenses_path(params.permit(:month).merge(category: "food")),          class: "btn-filter #{params[:category] == 'food'          ? 'active' : ''}" %>
+<%= link_to "Transport",     history_expenses_path(params.permit(:month).merge(category: "transport")),     class: "btn-filter #{params[:category] == 'transport'     ? 'active' : ''}" %>
+<%= link_to "Entertainment", history_expenses_path(params.permit(:month).merge(category: "entertainment")), class: "btn-filter #{params[:category] == 'entertainment' ? 'active' : ''}" %>
+<%= link_to "Utilities",     history_expenses_path(params.permit(:month).merge(category: "utilities")),     class: "btn-filter #{params[:category] == 'utilities'     ? 'active' : ''}" %>
+<%= link_to "Shopping",      history_expenses_path(params.permit(:month).merge(category: "shopping")),      class: "btn-filter #{params[:category] == 'shopping'      ? 'active' : ''}" %>
+<%= link_to "Health",        history_expenses_path(params.permit(:month).merge(category: "health")),        class: "btn-filter #{params[:category] == 'health'        ? 'active' : ''}" %>
+<%= link_to "Other",         history_expenses_path(params.permit(:month).merge(category: "other")),         class: "btn-filter #{params[:category] == 'other'         ? 'active' : ''}" %>

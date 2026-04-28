@@ -1,0 +1,2 @@
+module MonthlySnapshotsHelper
+end

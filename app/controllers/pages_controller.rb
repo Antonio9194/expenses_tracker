@@ -11,10 +11,20 @@ class PagesController < ApplicationController
     @monthly_subscription_sum = @subscriptions.active.where(billing_cycle: :monthly).sum(:amount)
     @budget_percentage = @monthly_budget.present? ? (@monthly_expenses_sum + @monthly_subscription_sum) / @monthly_budget * 100 : 0
     @savings = @monthly_budget.present? ? @monthly_budget - (@monthly_expenses_sum + @monthly_subscription_sum) : 0
-    @daily_limit = @savings / (Date.today.end_of_month.day - Date.today.day)
+    @daily_limit = Date.today.day == Date.today.end_of_month.day ? 0 : @savings / (Date.today.end_of_month.day - Date.today.day)
+    @monthly_snapshots = current_user.admin? ? MonthlySnapshot.all : current_user.monthly_snapshots
 
     @yearly_expenses = @expenses.where(date: Date.today.beginning_of_year..Date.today.end_of_year).sum(:amount)
     @active_subscriptions_sum = @subscriptions.active.sum(:amount)
     @combined_total = @yearly_expenses + @active_subscriptions_sum
+
+    last_month = Date.today.last_month.beginning_of_month
+    unless current_user.monthly_snapshots.exists?(month: last_month)
+      current_user.monthly_snapshots.create!(
+        month: last_month,
+        budget_amount: @monthly_budget,
+        savings: @savings
+      )
+    end
   end
 end

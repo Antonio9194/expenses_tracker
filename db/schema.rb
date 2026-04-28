@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_27_073628) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_28_091810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,8 +30,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_073628) do
     t.date "date"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_expenses_on_user_id"
+  end
+
+  create_table "monthly_snapshots", force: :cascade do |t|
+    t.decimal "budget_amount"
+    t.datetime "created_at", null: false
+    t.date "month"
+    t.decimal "savings"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_monthly_snapshots_on_user_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -42,7 +52,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_073628) do
     t.integer "status"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
@@ -62,5 +72,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_073628) do
 
   add_foreign_key "budgets", "users"
   add_foreign_key "expenses", "users"
+  add_foreign_key "monthly_snapshots", "users"
   add_foreign_key "subscriptions", "users"
 end
