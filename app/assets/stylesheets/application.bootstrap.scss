@@ -713,12 +713,15 @@ form.inline-form { display: inline; }
 }
 
 .form-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  background: rgba(28, 28, 38, 0.72);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: clamp(1.5rem, 4vw, 2.5rem);
   width: 100%;
   max-width: 640px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .form-card-header {
@@ -782,18 +785,19 @@ form.inline-form { display: inline; }
 
 .premium-input {
   width: 100%;
-  background: var(--bg-card-alt) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
   color: var(--text-primary) !important;
   font-size: 0.875rem !important;
   padding: 0.6rem 0.85rem !important;
-  transition: border-color 0.15s !important;
+  transition: border-color 0.15s, background 0.15s !important;
   outline: none !important;
   box-shadow: none !important;
 
   &:focus {
     border-color: var(--accent) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 0 0 3px var(--accent-glow) !important;
   }
 }
@@ -1318,7 +1322,9 @@ form.inline-form { display: inline; }
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
