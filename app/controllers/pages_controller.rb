@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     @budget_percentage = @monthly_budget.present? ? (@monthly_expenses_sum + @monthly_subscription_sum) / @monthly_budget * 100 : 0
     @savings = @monthly_budget.present? ? @monthly_budget - (@monthly_expenses_sum + @monthly_subscription_sum) : 0
     @daily_limit = Date.today.day == Date.today.end_of_month.day ? @savings : @savings / (Date.today.end_of_month.day - Date.today.day)
-    @days_left = Date.today.end_of_month.day - Date.today.day
+    @days_left = Date.today.end_of_month.day - Date.today.day + 1
     @monthly_snapshots = current_user.admin? ? MonthlySnapshot.all : current_user.monthly_snapshots
 
     @yearly_expenses = @expenses.where(date: Date.today.beginning_of_year..Date.today.end_of_year).sum(:amount)
