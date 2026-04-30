@@ -1,47 +1,8 @@
 <div class="stats-strip">
   <% if @budget.present? && @budget.enabled? %>
-    <div class="stat-card savings-card">
-      <div class="savings-item">
-        <div class="stat-label">Saved this month</div>
-        <div class="stat-value <%= @savings >= 0 ? 'savings-positive' : 'savings-negative' %>">
-          <%= format_currency(@savings) %>
-        </div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="savings-item">
-        <div class="stat-label">Daily Limit - <%= @days_left %> days left</div>
-        <div class="stat-value" style="color: var(--accent)"><%= format_currency(@daily_limit) %></div>
-      </div>
-    </div>
+    <%= render "stats_budget" %>
   <% end %>
-  <div class="stat-card savings-card">
-    <div class="savings-item">
-      <div class="stat-label"><%= Date.today.strftime("%B %Y") %> Expenses</div>
-      <div class="stat-value" style="color: var(--danger)"><%= format_currency(@monthly_expenses_sum) %></div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="savings-item">
-      <div class="stat-label"><%= Date.today.strftime("%B %Y") %> Subscriptions</div>
-      <div class="stat-value" style="color: var(--accent)"><%= format_currency(@monthly_subscription_sum) %></div>
-    </div>
-  </div>
-  <div class="stat-card yearly-card">
-    <div class="savings-card">
-      <div class="savings-item">
-        <div class="stat-label"><%= Date.today.strftime("%Y") %> Expenses</div>
-        <div class="stat-value"><%= format_currency(@yearly_expenses) %></div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="savings-item">
-        <div class="stat-label"><%= Date.today.strftime("%Y") %> Subscriptions</div>
-        <div class="stat-value"><%= format_currency(@active_subscriptions_sum) %></div>
-      </div>
-    </div>
-    <div class="stat-divider--h"></div>
-    <div class="savings-item">
-      <div class="stat-label">Combined Total</div>
-      <div class="stat-value"><%= format_currency(@combined_total) %></div>
-    </div>
-  </div>
+  <%= render "stats_monthly" %>
+  <%= render "stats_yearly" %>
 </div>
 </div>

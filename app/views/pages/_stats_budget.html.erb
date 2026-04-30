@@ -1,0 +1,19 @@
+<div class="stat-card savings-card"
+  data-controller="stats-budget"
+  data-stats-budget-savings-value="<%= @savings %>"
+  data-stats-budget-daily-limit-value="<%= @daily_limit %>"
+  data-stats-budget-currency-value="<%= current_user.currency %>">
+  <div class="savings-item">
+    <div class="stat-label">Saved this month</div>
+    <div class="stat-value <%= @savings >= 0 ? 'savings-positive' : 'savings-negative' %>"
+     data-stats-budget-target="savings">
+      <%= format_currency(@savings) %>
+    </div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="savings-item">
+    <div class="stat-label">Daily Limit - <%= @days_left %> days left</div>
+    <div class="stat-value" data-stats-budget-target="dailyLimit"
+     style="color: var(--accent)"><%= format_currency(@daily_limit) %></div>
+  </div>
+</div>

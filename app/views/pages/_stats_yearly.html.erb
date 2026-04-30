@@ -1,0 +1,28 @@
+<div class="stat-card yearly-card" data-controller="stats-yearly"
+data-stats-yearly-expenses-value="<%= @yearly_expenses %>"
+data-stats-yearly-active-subs-value="<%= @active_subscriptions_sum %>"
+data-stats-yearly-combined-total-value="<%= @combined_total %>"
+data-stats-yearly-currency-value="<%= current_user.currency %>">
+  <div class="savings-card">
+    <div class="savings-item">
+      <div class="stat-label"><%= Date.today.strftime("%Y") %> Expenses</div>
+      <div class="stat-value" data-stats-yearly-target="expenses">
+        <%= format_currency(@yearly_expenses) %>
+      </div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="savings-item">
+      <div class="stat-label"><%= Date.today.strftime("%Y") %> Subscriptions</div>
+      <div class="stat-value" data-stats-yearly-target="activeSubs">
+        <%= format_currency(@active_subscriptions_sum) %>
+      </div>
+    </div>
+  </div>
+  <div class="stat-divider--h"></div>
+  <div class="savings-item">
+    <div class="stat-label">Combined Total</div>
+    <div class="stat-value" data-stats-yearly-target="combined">
+      <%= format_currency(@combined_total) %>
+    </div>
+  </div>
+</div>

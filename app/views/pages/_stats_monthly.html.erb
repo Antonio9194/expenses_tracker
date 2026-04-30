@@ -1,0 +1,16 @@
+<div class="stat-card savings-card" data-controller="stats-monthly"
+  data-stats-monthly-expenses-sum-value="<%= @monthly_expenses_sum %>"
+  data-stats-monthly-subscriptions-sum-value="<%= @monthly_subscription_sum %>"
+  data-stats-monthly-currency-value="<%= current_user.currency %>">
+  <div class="savings-item">
+    <div class="stat-label"><%= Date.today.strftime("%B %Y") %> Expenses</div>
+    <div class="stat-value" data-stats-monthly-target="expensesSum"
+      style="color: var(--danger)"><%= format_currency(@monthly_expenses_sum) %></div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="savings-item">
+    <div class="stat-label"><%= Date.today.strftime("%B %Y") %> Subscriptions</div>
+    <div class="stat-value" data-stats-monthly-target="subscriptionsSum"
+      style="color: var(--accent)"><%= format_currency(@monthly_subscription_sum) %></div>
+  </div>
+</div>
