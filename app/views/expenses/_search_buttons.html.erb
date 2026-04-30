@@ -1,9 +1,27 @@
-<%= link_to "All",           expenses_path,                                          class: "btn-filter #{params[:category].blank? ? 'active' : ''}" %>
-<%= link_to "Housing",       expenses_path(category: "housing"),       class: "btn-filter #{params[:category] == 'housing'       ? 'active' : ''}" %>
-<%= link_to "Food",          expenses_path(category: "food"),          class: "btn-filter #{params[:category] == 'food'          ? 'active' : ''}" %>
-<%= link_to "Transport",     expenses_path(category: "transport"),     class: "btn-filter #{params[:category] == 'transport'     ? 'active' : ''}" %>
-<%= link_to "Entertainment", expenses_path(category: "entertainment"), class: "btn-filter #{params[:category] == 'entertainment' ? 'active' : ''}" %>
-<%= link_to "Utilities",     expenses_path(category: "utilities"),     class: "btn-filter #{params[:category] == 'utilities'     ? 'active' : ''}" %>
-<%= link_to "Shopping",      expenses_path(category: "shopping"),      class: "btn-filter #{params[:category] == 'shopping'      ? 'active' : ''}" %>
-<%= link_to "Health",        expenses_path(category: "health"),        class: "btn-filter #{params[:category] == 'health'        ? 'active' : ''}" %>
-<%= link_to "Other",         expenses_path(category: "other"),         class: "btn-filter #{params[:category] == 'other'         ? 'active' : ''}" %>
+<div data-controller="filter-tabs" class="filter-tabs-wrapper">
+  <div class="filter-tabs-pill" data-filter-tabs-target="pill"></div>
+  <%= link_to expenses_path, class: "btn-filter-icon #{params[:category].blank? ? 'active' : ''}", title: "All", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-grid"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "housing"), class: "btn-filter-icon #{params[:category] == 'housing' ? 'active' : ''}", title: "Housing", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-house"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "food"), class: "btn-filter-icon #{params[:category] == 'food' ? 'active' : ''}", title: "Food", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-cup-hot"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "transport"), class: "btn-filter-icon #{params[:category] == 'transport' ? 'active' : ''}", title: "Transport", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-train-front"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "entertainment"), class: "btn-filter-icon #{params[:category] == 'entertainment' ? 'active' : ''}", title: "Entertainment", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-controller"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "shopping"), class: "btn-filter-icon #{params[:category] == 'shopping' ? 'active' : ''}", title: "Shopping", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-bag"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "health"), class: "btn-filter-icon #{params[:category] == 'health' ? 'active' : ''}", title: "Health", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-heart-pulse"></i>
+  <% end %>
+  <%= link_to expenses_path(category: "other"), class: "btn-filter-icon #{params[:category] == 'other' ? 'active' : ''}", title: "Other", data: { filter_tabs_target: "tab", action: "click->filter-tabs#select", no_transition: true } do %>
+    <i class="bi bi-three-dots"></i>
+  <% end %>
+</div>

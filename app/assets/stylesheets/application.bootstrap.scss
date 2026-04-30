@@ -39,7 +39,6 @@ body {
 body.turbo-exit {
   filter: blur(8px);
   opacity: 0.2;
-  transform: scale(0.98);
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -168,10 +167,12 @@ body.turbo-exit {
 /* ═══════════════════════════════════════════════════════════════════
    NAV / FILTER BUTTONS
    ═══════════════════════════════════════════════════════════════════ */
+
+
 .btn-filter {
   display: inline-flex;
   align-items: center;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.85rem;
   font-size: 0.72rem;
   font-weight: 600;
   border-radius: var(--radius-xs);
@@ -189,6 +190,49 @@ body.turbo-exit {
     color: var(--accent);
     background: var(--accent-glow);
   }
+}
+
+.filter-tabs-pill {
+  position: absolute;
+  height: 44px;
+  width: 44px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  transition: none;
+  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn-filter-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+
+  i {
+    font-size: 1.1rem;
+  }
+
+  &:hover { color: var(--text-primary); }
+  &.active { color: var(--text-primary); }
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -430,14 +474,36 @@ form.inline-form { display: inline; }
    FILTER BAR
    ═══════════════════════════════════════════════════════════════════ */
 .panel-filters {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  padding: 0.7rem 1.25rem;
+  padding: 1.1rem 1.25rem;
+  min-height: 80px;
   border-bottom: 1px solid var(--border);
   background: var(--bg-card);
+}
+
+.filter-tabs-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  padding: 0.3rem;
+  white-space: nowrap;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease, background 0.35s ease;
+
+  &.popped {
+    transform: translate(-50%, -50%) scale(1.04);
+    border-color: rgba(99, 102, 241, 0.7);
+    background: rgba(99, 102, 241, 0.2);
+  }
 }
 
 .subscription-filters {
