@@ -5,11 +5,14 @@
         <span class="panel-icon"><i class="bi bi-receipt"></i></span>
         All Expenses
       </div>
-      <div class="panel-header-stat">
+      <div class="panel-header-stat"
+       data-controller="stats-budget"
+        data-stats-budget-history-value="<%= @expenses_sum %>"
+        data-stats-budget-currency-value="<%= current_user.currency %>">
         <div class="panel-header-stat-label">
           <%= params[:month].present? ? Date.parse(params[:month]).strftime("%B %Y") : "All Time" %>
         </div>
-        <div class="panel-header-stat-value"><%= format_currency(@expenses_sum) %></div>
+        <div class="panel-header-stat-value" data-stats-budget-target="history"><%= format_currency(@expenses_sum) %></div>
       </div>
     </div>
     <% if params[:month].present? %>

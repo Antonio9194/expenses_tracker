@@ -4,9 +4,13 @@
       <span class="panel-icon"><i class="bi bi-arrow-repeat"></i></span>
       Subscriptions
     </div>
-    <div class="panel-header-stat">
+    <div class="panel-header-stat"
+    data-controller="stats-budget"
+    data-stats-budget-monthly-subs-value="<%= @monthly_subscription_sum %>"
+    data-stats-budget-currency-value="<%= current_user.currency %>">
       <div class="panel-header-stat-label"><%= Date.today.strftime("%B %Y") %></div>
-      <div class="panel-header-stat-value"><%= format_currency(@monthly_subscription_sum) %></div>
+      <div class="panel-header-stat-value"
+      data-stats-budget-target="monthlySubs"><%= format_currency(@monthly_subscription_sum) %></div>
     </div>
     <%= link_to "+ New", new_subscription_path, class: "btn-new", data: { turbo_frame: "modal" } %>
   </div>

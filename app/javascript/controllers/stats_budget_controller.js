@@ -2,14 +2,43 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="stats-budget"
 export default class extends Controller {
-  static targets = ["savings", "dailyLimit"];
-  static values = { savings: Number, dailyLimit: Number, currency: String };
+  static targets = [
+    "savings",
+    "dailyLimit",
+    "monthlyExpenses",
+    "history",
+    "monthlySubs",
+  ];
+  static values = {
+    savings: Number,
+    dailyLimit: Number,
+    monthlyExpenses: Number,
+    history: Number,
+    monthlySubs: Number,
+    currency: String,
+  };
 
   connect() {
-    this.savingsTarget.textContent = 0;
-    this.dailyLimitTarget.textContent = 0;
-    this.countUp(this.savingsTarget, this.savingsValue);
-    this.countUp(this.dailyLimitTarget, this.dailyLimitValue);
+    if (this.hasSavingsTarget) {
+      this.savingsTarget.textContent = 0;
+      this.countUp(this.savingsTarget, this.savingsValue);
+    }
+    if (this.hasDailyLimitTarget) {
+      this.dailyLimitTarget.textContent = 0;
+      this.countUp(this.dailyLimitTarget, this.dailyLimitValue);
+    }
+    if (this.hasMonthlyExpensesTarget) {
+      this.monthlyExpensesTarget.textContent = 0;
+      this.countUp(this.monthlyExpensesTarget, this.monthlyExpensesValue);
+    }
+    if (this.hasHistoryTarget) {
+      this.historyTarget.textContent = 0;
+      this.countUp(this.historyTarget, this.historyValue);
+    }
+    if (this.hasMonthlySubsTarget) {
+      this.monthlySubsTarget.textContent = 0;
+      this.countUp(this.monthlySubsTarget, this.monthlySubsValue);
+    }
   }
 
   format(value) {

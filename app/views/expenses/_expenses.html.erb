@@ -4,9 +4,12 @@
       <span class="panel-icon"><i class="bi bi-receipt"></i></span>
       Expenses
     </div>
-    <div class="panel-header-stat">
+    <div class="panel-header-stat"
+      data-controller="stats-budget"
+      data-stats-budget-monthly-expenses-value="<%= @monthly_expenses_sum %>"
+      data-stats-budget-currency-value="<%= current_user.currency %>">
       <div class="panel-header-stat-label"><%= Date.today.strftime("%B %Y") %></div>
-      <div class="panel-header-stat-value"><%= format_currency(@monthly_expenses_sum) %></div>
+      <div class="panel-header-stat-value" data-stats-budget-target="monthlyExpenses"><%= format_currency(@monthly_expenses_sum) %></div>
     </div>
     <div class="panel-actions">
       <%= link_to history_expenses_path, class: "btn-history" do %>
