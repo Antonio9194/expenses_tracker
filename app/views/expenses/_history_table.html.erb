@@ -46,63 +46,40 @@
           { class: "history-month-select", onchange: "this.form.submit()" } %>
       <% end %>
     </div>
-    <div class="panel-scroll">
-      <% if @expenses.any? %>
-        <table class="panel-table">
-          <colgroup>
-            <col class="col-title">
-            <col class="col-secondary">
-            <col class="col-secondary">
-            <col class="col-amount">
-            <col class="col-actions">
-          </colgroup>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Date</th>
-              <th class="col-amount">Amount</th>
-              <th class="col-actions">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @expenses.each do |expense| %>
-              <tr>
-                <td><%= expense.title %></td>
-                <td><span class="tag tag-category"><%= expense.category.humanize %></span></td>
-                <td style="color: var(--text-muted)"><%= expense.date.strftime("%b '%y") %></td>
-                <td class="col-amount">
-                  <span class="amount"><%= format_currency(expense.amount) %></span>
-                </td>
-                <td class="col-actions action-cell">
-                  <%= link_to edit_expense_path(expense), class: "btn-action btn-edit", data: { turbo_frame: "modal" } do %>
-                    <span class="btn-label">Edit</span><i class="bi bi-pencil btn-icon"></i>
-                  <% end %>
-                  <%= link_to confirm_destroy_expense_path(expense),
-                                class: "btn-action btn-delete",
-                                data: { turbo_frame: "modal" } do %>
-                    <span class="btn-label">Delete</span><i class="bi bi-trash btn-icon"></i>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td class="tfoot-label">Total</td>
-              <td></td>
-              <td></td>
-              <td class="col-amount tfoot-total tfoot-total--danger"><%= format_currency(@expenses_sum) %></td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
-      <% else %>
-        <div class="empty-state">
-          <div class="empty-icon"><i class="bi bi-receipt"></i></div>
-          <div>No expenses found</div>
-        </div>
-      <% end %>
-    </div>
+    <% if @expenses.any? %>
+      <ul class="expense-list">
+        <% @expenses.each do |expense| %>
+          <li class="expense-item">
+            <div class="expense-item-icon expense-icon-<%= expense.category %>">
+              <i class="bi <%= category_icon(expense.category) %>"></i>
+            </div>
+            <div class="expense-item-info">
+              <div class="expense-item-title"><%= expense.title %></div>
+              <div class="expense-item-sub"><%= expense.category.humanize %> · <%= expense.date.strftime("%b '%y") %></div>
+            </div>
+            <div class="expense-item-right">
+              <div class="expense-item-amount"><%= format_currency(expense.amount) %></div>
+              <div class="expense-item-actions">
+                <%= link_to edit_expense_path(expense), class: "btn-action btn-edit", data: { turbo_frame: "modal" } do %>
+                  <i class="bi bi-pencil"></i>
+                <% end %>
+                <%= link_to confirm_destroy_expense_path(expense), class: "btn-action btn-delete", data: { turbo_frame: "modal" } do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <div class="expense-list-footer">
+        <span>Total</span>
+        <span class="tfoot-total tfoot-total--danger"><%= format_currency(@expenses_sum) %></span>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <div class="empty-icon"><i class="bi bi-receipt"></i></div>
+        <div>No expenses found</div>
+      </div>
+    <% end %>
   </div>
 </div>

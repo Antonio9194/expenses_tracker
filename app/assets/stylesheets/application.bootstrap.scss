@@ -574,6 +574,107 @@ form.inline-form { display: inline; }
 .tag-yearly    { background: rgba(108,99,255,0.12);  color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════════════
+   EXPENSE LIST (iOS style)
+   ═══════════════════════════════════════════════════════════════════ */
+.expense-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: rgba(255,255,255,0.025); }
+}
+
+.expense-item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.07);
+  color: var(--text-muted);
+}
+
+.expense-icon-food          { background: rgba(251,146,60,0.15);  color: #fb923c; }
+.expense-icon-transport     { background: rgba(96,165,250,0.15);  color: #60a5fa; }
+.expense-icon-shopping      { background: rgba(167,139,250,0.15); color: #a78bfa; }
+.expense-icon-health        { background: rgba(34,197,94,0.15);   color: var(--success); }
+.expense-icon-entertainment { background: rgba(251,191,36,0.15);  color: #fbbf24; }
+.expense-icon-housing       { background: rgba(255,77,109,0.15);  color: var(--danger); }
+.expense-icon-other         { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+
+.sub-icon-active    { background: rgba(34,197,94,0.15);   color: var(--success); }
+.sub-icon-paused    { background: rgba(245,158,11,0.15);  color: var(--warning); }
+.sub-icon-cancelled { background: rgba(255,77,109,0.15);  color: var(--danger); }
+
+.expense-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-item-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.expense-item-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.expense-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.expense-item-amount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--danger);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.expense-item-actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.expense-list-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-card-alt);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    AMOUNT
    ═══════════════════════════════════════════════════════════════════ */
 .amount {
