@@ -2,20 +2,23 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="splash"
 export default class extends Controller {
-  static targets = ["overlay"]
+  static targets = ["top", "bottom"]
 
   connect() {
     if (sessionStorage.getItem("splashShown")) {
-      this.overlayTarget.remove();
+      this.topTarget.remove();
+      this.bottomTarget.remove();
       return;
     }
 
     setTimeout(() => {
-      this.overlayTarget.classList.add("splash-exit");
+      this.topTarget.classList.add("splash-exit");
+      this.bottomTarget.classList.add("splash-exit");
       setTimeout(() => {
-        this.overlayTarget.remove();
+        this.topTarget.remove();
+        this.bottomTarget.remove();
         sessionStorage.setItem("splashShown", "true");
-      }, 600);
+      }, 700);
     }, 1200);
   }
 }

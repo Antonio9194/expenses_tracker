@@ -38,24 +38,34 @@ body {
 /* ═══════════════════════════════════════════════════════════════════
    SPLASH SCREEN
    ═══════════════════════════════════════════════════════════════════ */
-.splash-overlay {
+.splash-top {
   position: fixed;
-  inset: 0;
+  top: 0; left: 0; right: 0;
+  height: 50vh;
   background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 9999;
-  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 1rem;
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-.splash-overlay.splash-exit {
-  transform: translateY(-100%);
+.splash-bottom {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 50vh;
+  background: var(--bg);
+  z-index: 9999;
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
 }
+
+.splash-top.splash-exit  { transform: translateY(-100%); }
+.splash-bottom.splash-exit { transform: translateY(100%); }
 
 .splash-icon {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   animation: splashPulse 1s ease-in-out infinite alternate;
 }
 
