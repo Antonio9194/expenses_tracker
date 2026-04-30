@@ -30,7 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_091810) do
     t.date "date"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
@@ -52,7 +52,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_091810) do
     t.integer "status"
     t.string "title"
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
