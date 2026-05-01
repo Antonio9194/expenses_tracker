@@ -25,11 +25,6 @@
           </div>
           <div class="snapshot-divider"></div>
           <div class="snapshot-stat">
-            <span class="stat-label">Expenses</span>
-            <span class="stat-value stat-value--danger"><%= format_currency(@expenses_sum) %></span>
-          </div>
-          <div class="snapshot-divider"></div>
-          <div class="snapshot-stat">
             <span class="stat-label">Savings</span>
             <span class="stat-value <%= snapshot.savings >= 0 ? 'stat-value--accent' : 'stat-value--danger' %>">
               <%= format_currency(snapshot.savings) %>

@@ -21,10 +21,15 @@ class PagesController < ApplicationController
 
     last_month = Date.today.last_month.beginning_of_month
     unless current_user.monthly_snapshots.exists?(month: last_month)
+      last_month_expenses_sum = current_user.expenses
+        .where(date: last_month..last_month.end_of_month)
+        .sum(:amount)
+      last_month_savings = @monthly_budget.present? ?
+        @monthly_budget - (last_month_expenses_sum + @monthly_subscription_sum) : 0
       current_user.monthly_snapshots.create!(
         month: last_month,
         budget_amount: @monthly_budget,
-        savings: @savings
+        savings: last_month_savings
       )
     end
   end
