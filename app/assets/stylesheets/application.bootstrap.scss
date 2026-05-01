@@ -1437,22 +1437,42 @@ form.inline-form { display: inline; }
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.1s;
 }
 
-.ptr-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid rgba(108, 99, 255, 0.15);
-  border-top-color: var(--accent);
+.ptr-track {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
+  background: rgba(18, 18, 28, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.ptr-ready .ptr-spinner {
-  border-color: var(--accent);
+.ptr-arc {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(108, 99, 255, 0.15);
+  border-top-color: var(--accent);
 }
 
-.ptr-refreshing .ptr-spinner {
+.ptr-ready .ptr-track {
+  border-color: rgba(108, 99, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(108, 99, 255, 0.35);
+}
+
+.ptr-ready .ptr-arc {
+  border-color: rgba(108, 99, 255, 0.3);
+  border-top-color: var(--accent);
+}
+
+.ptr-refreshing .ptr-arc {
   animation: ptr-spin 0.7s linear infinite;
 }
 

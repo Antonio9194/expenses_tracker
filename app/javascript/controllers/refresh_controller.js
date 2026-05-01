@@ -8,14 +8,12 @@ export default class extends Controller {
     this.ready = false
     this.threshold = 80
 
-    // Create the spinner element and add it to the page
     this.indicator = document.createElement("div")
     this.indicator.className = "ptr-indicator"
-    this.indicator.innerHTML = `<div class="ptr-spinner"></div>`
-    document.body.prepend(this.indicator)
+    this.indicator.innerHTML = `<div class="ptr-track"><div class="ptr-arc"></div></div>`
+    // Prepend to <html> so body transform doesn't affect it
+    document.documentElement.prepend(this.indicator)
 
-    // Bind touch events manually (we need passive: false on touchmove
-    // so we can call preventDefault and stop the page from scrolling while pulling)
     this.onStart = this.touchStart.bind(this)
     this.onMove  = this.touchMove.bind(this)
     this.onEnd   = this.touchEnd.bind(this)
@@ -26,7 +24,6 @@ export default class extends Controller {
   }
 
   disconnect() {
-    // Clean up when controller is removed
     this.element.removeEventListener("touchstart", this.onStart)
     this.element.removeEventListener("touchmove",  this.onMove)
     this.element.removeEventListener("touchend",   this.onEnd)
@@ -34,7 +31,6 @@ export default class extends Controller {
   }
 
   touchStart(e) {
-    // Only activate when already at the very top of the page
     if (window.scrollY === 0) {
       this.startY = e.touches[0].clientY
       this.pulling = true
@@ -45,10 +41,18 @@ export default class extends Controller {
     if (!this.pulling) return
     const distance = e.touches[0].clientY - this.startY
     if (distance > 0 && window.scrollY === 0) {
-      e.preventDefault() // prevent normal scroll while pulling
-      const pull = Math.min(distance * 0.5, this.threshold) // dampen movement
+      e.preventDefault()
+      const pull = Math.min(distance * 0.5, this.threshold)
+      const progress = pull / this.threshold
+
+      // Slide indicator down
       this.indicator.style.transform = `translateX(-50%) translateY(${pull - 60}px)`
-      this.indicator.style.opacity   = pull / this.threshold
+      this.indicator.style.opacity = progress
+
+      // Pull page content down (elastic feel)
+      this.element.style.transition = "none"
+      this.element.style.transform = `translateY(${pull * 0.6}px)`
+
       this.ready = pull >= this.threshold - 10
       this.indicator.classList.toggle("ptr-ready", this.ready)
     }
@@ -58,15 +62,23 @@ export default class extends Controller {
     if (!this.pulling) return
     this.pulling = false
 
+    // Spring page back
+    this.element.style.transition = "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)"
+    this.element.style.transform = ""
+
     if (this.ready) {
-      // Spin and refresh
       this.indicator.classList.add("ptr-refreshing")
-      setTimeout(() => Turbo.visit(window.location.href), 400)
+      setTimeout(() => {
+        this.element.style.transition = ""
+        this.element.style.transform = ""
+        Turbo.visit(window.location.href)
+      }, 500)
     } else {
-      // Snap back
-      this.indicator.style.transform = ""
-      this.indicator.style.opacity   = "0"
-      this.indicator.classList.remove("ptr-ready")
+      this.indicator.style.transition = "transform 0.3s ease, opacity 0.2s ease"
+      this.indicator.style.transform = "translateX(-50%) translateY(-60px)"
+      this.indicator.style.opacity = "0"
+      setTimeout(() => { this.indicator.style.transition = "" }, 300)
+      this.element.style.transition = ""
     }
     this.ready = false
   }
