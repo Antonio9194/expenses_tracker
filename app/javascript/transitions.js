@@ -6,6 +6,10 @@ document.addEventListener("click", (e) => {
   }
 })
 
+document.addEventListener("turbo:skip-transition", () => {
+  skipTransition = true
+})
+
 document.addEventListener("turbo:visit", () => {
   if (skipTransition) {
     skipTransition = false

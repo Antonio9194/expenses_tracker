@@ -74,6 +74,7 @@ export default class extends Controller {
       setTimeout(() => {
         this.element.style.transition = "";
         this.element.style.transform = "";
+        document.dispatchEvent(new CustomEvent("turbo:skip-transition"));
         Turbo.visit(window.location.href);
       }, 500);
     } else {
