@@ -23,7 +23,7 @@
     <%= javascript_importmap_tags %>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
   </head>
-  <body>
+  <body data-controller="refresh">
     <%= yield %>
     <turbo-frame id="modal"></turbo-frame>
   </body>

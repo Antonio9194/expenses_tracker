@@ -1425,3 +1425,37 @@ form.inline-form { display: inline; }
 @media (max-width: 320px) {
   .modal-backdrop { padding: 0.5rem; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   PULL TO REFRESH
+   ═══════════════════════════════════════════════════════════════════ */
+.ptr-indicator {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-60px);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s;
+}
+
+.ptr-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(108, 99, 255, 0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+}
+
+.ptr-ready .ptr-spinner {
+  border-color: var(--accent);
+}
+
+.ptr-refreshing .ptr-spinner {
+  animation: ptr-spin 0.7s linear infinite;
+}
+
+@keyframes ptr-spin {
+  to { transform: rotate(360deg); }
+}

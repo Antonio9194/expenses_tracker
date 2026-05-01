@@ -1,5 +1,7 @@
 Subscription.destroy_all
 Expense.destroy_all
+MonthlySnapshot.destroy_all
+Budget.destroy_all
 User.destroy_all
 
 admin = User.create!(
@@ -89,7 +91,7 @@ expenses = [
   { title: "Amazon",           amount: 21165, category: :shopping,      date: "2026-04-27" },
 
   # Entertainment
-  { title: "Karaoke",          amount: 6000,  category: :entertainment, date: "2026-04-23" },
+  { title: "Karaoke",          amount: 6000,  category: :entertainment, date: "2026-04-23" }
 ]
 
 expenses.each do |attrs|
@@ -113,7 +115,7 @@ subscriptions = [
   # Weekly — active
   { title: "Duolingo+",      amount: 480,   billing_cycle: :weekly,  status: :active,    start_date: "2025-01-06" },
   # Weekly — paused
-  { title: "News Digest",    amount: 300,   billing_cycle: :weekly,  status: :paused,    start_date: "2024-10-01" },
+  { title: "News Digest",    amount: 300,   billing_cycle: :weekly,  status: :paused,    start_date: "2024-10-01" }
 ]
 
 subscriptions.each do |attrs|
